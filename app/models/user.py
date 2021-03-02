@@ -13,6 +13,8 @@ class User(db.Model, UserMixin):
   city = db.Column(db.String(50), nullable = False)
   state = db.Column(db.String(2), nullable = False)
   zipcode = db.Column(db.Integer, nullable = False)
+  latitude = db.Column(db.Float)
+  longitude = db.Column(db.Float)
   hashed_password = db.Column(db.String(255), nullable = False)
 
 
@@ -38,6 +40,8 @@ class User(db.Model, UserMixin):
       "address": self.address,
       "city": self.city,
       "state": self.state,
-      "zipcode": self.zipcode
+      "zipcode": self.zipcode,
+      "latitude": self.latitude,
+      "longitude": self.longitude,
       "email": self.email
     }
