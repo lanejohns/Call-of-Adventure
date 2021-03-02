@@ -4,7 +4,7 @@ class Party(db.Model):
     __tablename__ = 'parties'
 
     id = db.Column(db.Integer, primary_key = True)
-    host_id = db.Column(db.Integer, db.ForeignKey("users.id", nullable = False))
+    host_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable = False)
     party_name = db.Column(db.String(300), nullable = False)
     party_size = db.Column(db.Integer, nullable = False)
     open_to_request = db.Column(db.Boolean, nullable = False)
