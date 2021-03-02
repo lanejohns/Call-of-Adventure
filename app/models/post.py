@@ -6,7 +6,7 @@ class Post(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     party_id = db.Column(db.Integer, ForeignKey("parties.id"), nullable = False)
     user_id = db.Column(db.Integer, ForeignKey("users.id"), nullable = False)
-    body = db.Column(db.String(3000), nullable = True)
+    body = db.Column(db.String(3000), nullable = False)
 
     def to_dict(self):
         return {
