@@ -28,7 +28,7 @@ def accept_request(id):
         return "Bad Data"
 
 
-# TODO: Figure out how to write the write when a party will accept a request.
+# TODO: Figure out how to write the route for when a party will accept a request.
 
 
 @request_routes.route('/<id>', methods=["DELETE"])
