@@ -26,3 +26,19 @@ def create_party():
         db.session.commit()
         return {"party": party.to_dict()}
     return {"errors": "set errors here"}
+
+
+@party_routes.route('/<id>', methods=['DELETE'])
+def delete_party(id):
+    party = Party.query.filter(Party.id == id).first()
+    db.session.delete(party)
+    db.session.commit()
+    return {'party': party.to_dict()}
+
+
+@party_routes.route('/<id>')
+def single_party(id):
+    spot = Spot.query.get(id)
+    return {'spot': spot.to_dict()}
+
+
