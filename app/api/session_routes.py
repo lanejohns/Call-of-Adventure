@@ -17,7 +17,7 @@ def create_session():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         session = Session(
-            party_id=1,
+            party_id=party_id,
             title=form.data['title'],
             description=form.data['description'],
             date=form.data['date'],
