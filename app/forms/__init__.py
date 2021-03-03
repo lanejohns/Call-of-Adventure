@@ -3,3 +3,4 @@ from .signup_form import SignUpForm
 from .party_form import PartyForm
 from .session_form import SessionForm
 from .request_form import RequestForm
+from .post_form import PostForm
