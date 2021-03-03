@@ -1,5 +1,7 @@
 from flask import Blueprint, jsonify, request
+from flask_login import current_user
 from app.models import db, Party
+from app.forms import PartyForm
 
 party_routes = Blueprint('parties', __name__)
 
@@ -15,7 +17,7 @@ def create_party():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         party = Party(
-            host_id=form.data['host_id'],
+            host_id=current_user.id
             party_name=form.data['party_name'],
             party_size=form.data['party_size'],
             open_to_request=form.data['open_to_request']
