@@ -10,7 +10,6 @@ class Party(db.Model):
     party_size = db.Column(db.Integer, nullable = False)
     open_to_request = db.Column(db.Boolean, nullable = False)
 
-    # sessions = db.relationship("Party", back_populates="party")
     sessions = db.relationship("Session", back_populates="party")
 
     posts = db.relationship("Post", back_populates="party")
