@@ -9,7 +9,7 @@ party_users = db.Table(
         primary_key=True
     ),
     db.Column(
-        "user_id"
+        "user_id",
         db.Integer,
         db.ForeignKey("users.id"),
         primary_key=True
