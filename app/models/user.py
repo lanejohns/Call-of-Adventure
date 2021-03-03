@@ -1,6 +1,7 @@
 from .db import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from .party_user import party_users
 
 class User(db.Model, UserMixin):
   __tablename__ = 'users'
@@ -17,6 +18,12 @@ class User(db.Model, UserMixin):
   longitude = db.Column(db.Float)
   hashed_password = db.Column(db.String(255), nullable = False)
 
+  user_post = db.relationship("Post", back_populates="poster")
+
+  request = db.relationship("Request", back_populates="requester")
+
+  hosted_parties = db.relationship("Party", back_populates = "host")
+  member_parties = db.relationship("Party", secondary=party_users, back_populates="party_members")
 
   @property
   def password(self):

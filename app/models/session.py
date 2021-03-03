@@ -17,6 +17,9 @@ class Session(db.Model):
     longitude = db.Column(db.Float)
     in_person = db.Column(db.Boolean, nullable = False)
 
+    party = db.relationship("Party", back_populates="sessions")
+
+
     def to_dict(self):
         return {
             "id": self.id,
