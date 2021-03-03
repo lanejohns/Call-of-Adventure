@@ -14,6 +14,7 @@ def all_posts(id):
 @post_routes.route("/<id>", methods=["POST"])
 def add_post(id):
     form = PostForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         post = Post(
             party_id=id,
@@ -25,3 +26,10 @@ def add_post(id):
         return {"post": post.to_dict()}
     return {"errors": "set errors here"}
 
+
+@post_routes.route("/<id>", methods=["DELETE"])
+def delete_post(id):
+    post = Post.query.filter(Post.party_id == id ).first()
+    db.session.delete(post)
+    db.session.commit()
+    return {"post": post.to_dict()}
