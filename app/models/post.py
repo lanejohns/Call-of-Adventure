@@ -8,6 +8,11 @@ class Post(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable = False)
     body = db.Column(db.String(3000), nullable = False)
 
+    party = db.relationship("Party", back_populates="posts")
+    poster = db.relationship("User", back_populates="user_post")
+
+
+
     def to_dict(self):
         return {
             "id": self.id,

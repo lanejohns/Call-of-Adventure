@@ -19,6 +19,7 @@ class Session(db.Model):
 
     party = db.relationship("Session", back_populates="sessions")
 
+
     def to_dict(self):
         return {
             "id": self.id,

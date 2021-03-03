@@ -8,6 +8,9 @@ class Request(db.Model):
     party_id = db.Column(db.Integer, db.ForeignKey("parties.id"), nullable = False)
     message = db.Column(db.String(2000), nullable = True)
 
+    party = db.relationship("Party", back_populates="request")
+    requester = db.relationship("User", back_populates="request")
+
     def to_dict(self):
         return {
             "id": self.id,
