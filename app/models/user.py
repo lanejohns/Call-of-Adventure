@@ -17,6 +17,8 @@ class User(db.Model, UserMixin):
   longitude = db.Column(db.Float)
   hashed_password = db.Column(db.String(255), nullable = False)
 
+  hosted_parties = db.relationship("Party", back_populates = "host")
+  member_parties = db.relationship("Party", secondary=party_user, back_populates="party_members")
 
   @property
   def password(self):

@@ -1,4 +1,5 @@
 from .db import db
+from .party_user import party_user
 
 class Party(db.Model):
     __tablename__ = 'parties'
@@ -9,7 +10,11 @@ class Party(db.Model):
     party_size = db.Column(db.Integer, nullable = False)
     open_to_request = db.Column(db.Boolean, nullable = False)
 
-    host = db.relationship("User")
+    sessions = db.relationship("Party", back_populates="party")
+
+    host = db.relationship("User", back_populates = "hosted_parties")
+    party_members = db.relationship("User", secondary=party_user, back_populates="member_parties")
+
 
     def to_dict(self):
         return {
