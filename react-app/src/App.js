@@ -9,7 +9,7 @@ import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import User from "./components/User";
 import PartyComponent from "./components/PartyComponent/index.js"
-
+import HomeComponent from "./components/HomePageComponent/index.js"
 import { authenticate } from "./services/auth";
 import configureStore from "./store";
 
@@ -54,7 +54,7 @@ function App() {
             <User />
           </ProtectedRoute>
           <ProtectedRoute path="/" exact={true} authenticated={authenticated}>
-            <h1>My Home Page</h1>
+            <HomeComponent />
           </ProtectedRoute>
           <ProtectedRoute path="/party/create" exact={true} authenticated={authenticated}>
             <PartyComponent />

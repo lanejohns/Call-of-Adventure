@@ -1,8 +1,12 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 
-const rootReducer = combineReducers({
+import partyReducer from "./party"
+import userReducer from "./user";
 
+const rootReducer = combineReducers({
+  parties: partyReducer,
+  users: userReducer
 })
 
 let enhancer;
