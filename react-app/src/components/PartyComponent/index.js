@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom";
 
+import { createParty } from "../../store/party"
 import "./PartyComponent.css"
 
 const PartyComponent = () => {
@@ -19,13 +20,14 @@ const PartyComponent = () => {
             partySize,
             openToRequest
         }
-        // dispatch createParty(newParty)
+        await dispatch(createParty(newParty))
+        history.push("/")
     }
 
     return (
         <div>
             <h1>This is the Party Component!</h1>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <label>Party Name</label>
                     <input value={partyName} onChange={(event) => setPartyName(event.target.value)} placeholder="Party Name"/>
                 <label>Party Size</label>
