@@ -8,15 +8,18 @@ const createNewParty = (party) => {
 }
 
 
-export const createParty = ({partyName, partySize, openToRequest}) => async (dispatch) => {
-    const response = await fetch("api/parties/", {
+export const createParty = (payload) => async (dispatch) => {
+    console.log("STARTING THE THUNK", payload)
+    const response = await fetch("/api/parties/", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({partyName, partySize, openToRequest})
+        body: JSON.stringify(payload)
     })
+    console.log("THIS IS THE RESPONSE", response)
     const party = await response.json()
+    console.log("THIS IS THE PARTY", party)
     dispatch(createNewParty(party))
     return party
 }
