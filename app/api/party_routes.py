@@ -17,6 +17,8 @@ def create_party():
     print("WE ARE HITTING THE START OF THE API ROUTE")
     form = PartyForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+    party_mems = request.json.get("partyMembers")
+    print("THIS IS PARTY_MEMS", party_mems)
     print("THIS IS FORM DATA", form.data)
     if form.validate_on_submit():
         party = Party(
@@ -26,8 +28,10 @@ def create_party():
             open_to_request=form.data['open_to_request']
         )
         print("THIS IS THE PARTY ON THE API ROUTE", party)
-        member1 = User.query.filter_by(username="Yasha").first()
-        party.party_members.append(member1)
+        for member in party_mems:
+            new_member = User.query.filter_by(username = member).first()
+            if new_member:
+                party.party_members.append(new_member)
         db.session.add(party)
         db.session.commit()
         return {"party": party.to_dict()}
