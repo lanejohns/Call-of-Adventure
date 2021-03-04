@@ -1,12 +1,10 @@
-import { WrappedGoogleMap } from "../GoogleMapsComponent"
-
 import React from "react"
 
 import { WrappedGoogleMap } from "../GoogleMapsComponent"
 
 const HomeComponent = () => {
 
-    const apiKey = process.env.REACT_API_GOOGLE_KEY
+    const apiKey = process.env.REACT_APP_GOOGLE_KEY
     return (
         <div>
             <WrappedGoogleMap
@@ -18,3 +16,5 @@ const HomeComponent = () => {
         </div>
     )
 }
+
+export default HomeComponent

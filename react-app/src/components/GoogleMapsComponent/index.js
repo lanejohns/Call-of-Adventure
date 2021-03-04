@@ -20,7 +20,7 @@ const GoogleMapComponent = () => {
 
     return (
         <GoogleMap
-        defaultZoom={6}
+        defaultZoom={13}
         defaultCenter={{lat: 42.3551, lng: -71.0656}}
         // defaultOptions={{styles:mapStyles}}
         >

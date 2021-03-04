@@ -2,17 +2,12 @@ import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom";
 
-import { WrappedGoogleMap } from "../GoogleMapsComponent"
 import { createParty } from "../../store/party"
-import { getUsers } from "../../store/user"
 import "./PartyComponent.css"
 
 const PartyComponent = () => {
     const dispatch = useDispatch()
     const history = useHistory()
-    const allUsers = useSelector((state) => state.users.users);
-
-    const apiKey = process.env.REACT_APP_GOOGLE_KEY
 
     const [partyName, setPartyName] = useState("")
     const [partySize, setPartySize] = useState(4)
@@ -31,10 +26,6 @@ const PartyComponent = () => {
         history.push("/")
     }
 
-    useEffect(() => {
-        dispatch(getUsers())
-    }, [dispatch])
-
     return (
         <div>
             <h1>This is the Party Component!</h1>
@@ -46,16 +37,7 @@ const PartyComponent = () => {
                 <label>Is your party open to Requests?</label>
                     <input type="checkbox" value={openToRequest} onChange={(event) => setOpenToRequest(!openToRequest)}/>
                 <button>Submit</button>
-                {allUsers && console.log("THIS IS ALL USERS", allUsers)}
             </form>
-            <div>
-            <WrappedGoogleMap
-                googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${apiKey}`}
-                loadingElement={<div style={{ height: "400px" }} />}
-                containerElement={<div style={{ height: "800px" }} />}
-                mapElement={<div style={{ height: "800px" }} />}
-            />
-        </div>
         </div>
     )
 }
