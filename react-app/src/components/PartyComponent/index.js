@@ -10,7 +10,7 @@ const PartyComponent = () => {
 
     const [partyName, setPartyName] = useState("")
     const [partySize, setPartySize] = useState(4)
-    const [openToRequest, setOpenToRequest] = useState(true)
+    const [openToRequest, setOpenToRequest] = useState(false)
 
     const handleSubmit = async (event) => {
         event.preventDefault()
@@ -30,6 +30,9 @@ const PartyComponent = () => {
                     <input value={partyName} onChange={(event) => setPartyName(event.target.value)} placeholder="Party Name"/>
                 <label>Party Size</label>
                     <input value={partySize} onChange={(event) => setPartySize(event.target.value)}/>
+                <label>Is your party open to Requests?</label>
+                    <input type="checkbox" value={openToRequest} onChange={(event) => setOpenToRequest(!openToRequest)}/>
+                <button>Submit</button>
             </form>
         </div>
     )

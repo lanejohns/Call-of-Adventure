@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from flask_login import current_user
+from flask_login import current_user, login_required
 from app.models import db, Party
 from app.forms import PartyForm
 
@@ -12,6 +12,7 @@ def all_parties():
 
 
 @party_routes.route('/', methods=["POST"])
+@login_required
 def create_party():
     form = PartyForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -22,6 +23,8 @@ def create_party():
             party_size=form.data['party_size'],
             open_to_request=form.data['open_to_request']
         )
+        member1 = User.query.filter_by(username="Yasha").first()
+        party.party_members.append(member1)
         db.session.add(party)
         db.session.commit()
         return {"party": party.to_dict()}
