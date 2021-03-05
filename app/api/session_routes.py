@@ -14,10 +14,11 @@ def all_sessions():
 @session_routes.route('/', methods=["POST"])
 def create_session():
     form = SessionForm()
+    print("THIS IS THE FORM", form.data)
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         session = Session(
-            party_id=party_id,
+            party_id=form.data['party_id'],
             title=form.data['title'],
             description=form.data['description'],
             date=form.data['date'],
@@ -30,6 +31,7 @@ def create_session():
             longitude=form.data['longitude'],
             in_person=form.data['in_person']
         )
+        print("THIS IS WHAT SESSION LOOKS LIKE ON THE BACKEND ---->", session)
         db.session.add(session)
         db.session.commit()
         return {"session": session.to_dict()}

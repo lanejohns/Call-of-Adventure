@@ -74,12 +74,12 @@ const CreateSessionComponent = () => {
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
     const [date, setDate] = useState()
-    const [time, setTime] = useState()
+    const [time, setTime] = useState("")
     const [address, setAddress] = useState("")
     const [city, setCity] = useState("")
     const [state, setState] = useState(states[0])
     const [zipcode, setZipcode] = useState("")
-    const [inPerson, setInPerson] = useState("")
+    const [inPerson, setInPerson] = useState(false)
 
     const getLat = (address, city, state, zipcode) => {
         return Geocode.fromAddress(`${address} ${city}, ${state} ${zipcode}`).then(
@@ -124,6 +124,7 @@ const CreateSessionComponent = () => {
             longitude: lng,
             in_person: inPerson
         }
+        console.log("THIS IS THE IN PERSON ANSWER", inPerson)
         console.log("WE ARE ABOUT TO CREATE SESSION", newSession)
         dispatch(createSession(newSession))
     }
@@ -154,7 +155,7 @@ const CreateSessionComponent = () => {
                     </div>
                     <div className="time-form">
                         <label>What time will you be gathering?</label>
-                        <input type="time" value={time} onChange={(event) => setTime(event.target.value)} />
+                        <input value={time} onChange={(event) => setTime(event.target.value)} />
                     </div>
                     <div className="address-form">
                         <label>Address</label>
@@ -178,7 +179,7 @@ const CreateSessionComponent = () => {
                     </div>
                     <div className="physical-form">
                         <label>Are you playing in person?</label>
-                        <input type="checkbox" value={inPerson} onChange={(event) => setInPerson(event.target.value)}/>
+                        <input type="checkbox" value={inPerson} onChange={(event) => setInPerson(!inPerson)}/>
                     </div>
                     <button type="submit">Submit</button>
                 </form>
