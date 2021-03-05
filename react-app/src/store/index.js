@@ -3,6 +3,7 @@ import thunk from "redux-thunk";
 
 import partyReducer from "./party"
 import userReducer from "./user";
+import sessionReducer from "./session"
 
 const rootReducer = combineReducers({
   parties: partyReducer,

@@ -4,14 +4,17 @@ import { useParams } from "react-router-dom"
 import { enGB } from 'date-fns/locale'
 import { DatePicker, DatePickerCalendar } from 'react-nice-dates'
 import Geocode from "react-geocode";
+
+import { createSession } from "../../../store/session"
 import 'react-nice-dates/build/style.css'
 
 const CreateSessionComponent = () => {
 
+    const dispatch = useDispatch()
     const apiKey = process.env.REACT_APP_GOOGLE_KEY
     const partyId = Number.parseInt(useParams().partyId)
 
-    Geocode.setApiKey(googleApiKey);
+    Geocode.setApiKey(apiKey);
     Geocode.setLanguage("en");
     Geocode.setLocationType("ROOFTOP");
 
@@ -103,6 +106,7 @@ const CreateSessionComponent = () => {
          };
 
     const handleSubmit = async (event) => {
+        console.log("WE ARE HITTING THE HANDLE SUBMIT")
         event.preventDefault()
         const lat = await getLat(address, city, state, zipcode);
         const lng = await getLng(address, city, state, zipcode);
@@ -120,6 +124,7 @@ const CreateSessionComponent = () => {
             longitude: lng,
             in_person: inPerson
         }
+        console.log("WE ARE ABOUT TO CREATE SESSION", newSession)
         dispatch(createSession(newSession))
     }
 
@@ -175,6 +180,7 @@ const CreateSessionComponent = () => {
                         <label>Are you playing in person?</label>
                         <input type="checkbox" value={inPerson} onChange={(event) => setInPerson(event.target.value)}/>
                     </div>
+                    <button type="submit">Submit</button>
                 </form>
             </div>
         </div>

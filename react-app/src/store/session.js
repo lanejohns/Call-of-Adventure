@@ -29,6 +29,7 @@ export const createSession = ({
     longitude,
     in_person,
 }) => async (dispatch) => {
+    console.log("WE ARE ABOUT TO FETCH FROM API/SESSIONS")
     const response = await fetch("/api/sessions/", {
         method: "POST",
         headers: {
@@ -49,11 +50,12 @@ export const createSession = ({
             in_person,
         }),
     });
+    console.log("THIS IS THE RESPONSE", response)
     const session = await response.json()
     dispatch(createNewSession(session))
 }
 
-export const getSessions = () => (dispatch) => {
+export const getSessions = () => async (dispatch) => {
     const response = await fetch("/api/sessions")
     const sessions = await response.json()
     return dispatch(getAllSessions(sessions))
@@ -72,6 +74,8 @@ const sessionReducer = (state = initialState, action) => {
             const all_sessions = state.all_sessions
             newState = { all_sessions: { ...all_sessions, ...new_session }}
             return newState
+        default:
+            return state
     }
 }
 
