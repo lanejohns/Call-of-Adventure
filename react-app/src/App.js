@@ -57,7 +57,7 @@ function App() {
           <ProtectedRoute path="/" exact={true} authenticated={authenticated}>
             <HomeComponent />
           </ProtectedRoute>
-          <ProtectedRoute path="/party/:id" exact={true} authenticated={authenticated}>
+          <ProtectedRoute path="/party/:partyId" exact={true} authenticated={authenticated}>
             <PartyProfileComponent />
           </ProtectedRoute>
           <ProtectedRoute path="/party/create" exact={true} authenticated={authenticated}>
