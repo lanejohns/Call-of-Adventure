@@ -48,7 +48,7 @@ const PartyProfileComponent = () => {
             <div>
                 <h1>{party.party_name}</h1>
                 <button onClick={handleClick}>Make a session</button>
-                <button onClick={handleSessions}>View yours sessions</button>
+                <button onClick={handleSessions}>View your sessions</button>
             </div>
             }
             {/* {sessions && 
