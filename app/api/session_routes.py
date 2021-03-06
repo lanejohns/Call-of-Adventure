@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import current_user
-from app.models import db, Session
+from app.models import db, Session, Party
 from app.forms import SessionForm
 
 session_routes = Blueprint('sessions', __name__)
@@ -47,6 +47,6 @@ def delete_session(id):
 
 
 @session_routes.route('/<id>')
-def single_session(id):
-    session = Session.query.get(id)
-    return {'session': session.to_dict()}
+def party_sessions(id):
+    sessions = Session.query.filter(Party.id == id).all()
+    return {"all_sessions": {session.id: session.to_dict() for session in sessions}}

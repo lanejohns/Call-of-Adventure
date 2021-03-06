@@ -1,5 +1,6 @@
 const CREATE_SESSION = "session/createNewSession"
 const LOAD = "session/getAllSessions"
+const DELETE = "session/deleteOneSession"
 
 const createNewSession = (session) => {
     return {
@@ -12,6 +13,13 @@ const getAllSessions = (sessions) => {
     return {
         type: LOAD,
         payload: sessions
+    }
+}
+
+const deleteOneSession = (session) => {
+    return {
+        type: DELETE,
+        payload: session
     }
 }
 
@@ -55,10 +63,22 @@ export const createSession = ({
     dispatch(createNewSession(session))
 }
 
-export const getSessions = () => async (dispatch) => {
-    const response = await fetch("/api/sessions")
+export const getSessions = (id) => async (dispatch) => {
+    const response = await fetch(`/api/sessions/${id}`)
     const sessions = await response.json()
     return dispatch(getAllSessions(sessions))
+}
+
+export const deleteSession = (id) => async (dispatch) => {
+    console.log("WE ARE HITTING THE DELETE THUNK", id)
+    const response = await fetch(`/api/sessions/${id}`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+    const session = await response.json()
+    return dispatch(deleteOneSession(session))
 }
 
 const initialState = {};
@@ -73,6 +93,11 @@ const sessionReducer = (state = initialState, action) => {
             const new_session = action.payload.session
             const all_sessions = state.all_sessions
             newState = { all_sessions: { ...all_sessions, ...new_session }}
+            return newState
+        case DELETE:
+            const deleted_session = action.payload.session
+            newState = Object.assign({}, state)
+            delete newState.all_sessions[deleted_session.id]
             return newState
         default:
             return state
