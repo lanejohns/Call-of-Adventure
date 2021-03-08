@@ -1,10 +1,22 @@
-import React from "react"
+import React, { useEffect } from "react"
+import { useSelector, useDispatch } from "react-redux";
 import Jumbotron from 'react-bootstrap/Jumbotron'
 import Container from 'react-bootstrap/Jumbotron'
 
 import { WrappedGoogleMap } from "../GoogleMapsComponent"
+import { getUsers } from "../../store/user"
+import { getParties } from "../../store/party"
 
 const HomeComponent = () => {
+
+    const dispatch = useDispatch()
+    const allUsers = useSelector((state) => state.users.users);
+    const allParties = useSelector(state => state.parties.all_parties)
+
+    useEffect(() => {
+        dispatch(getUsers())
+        dispatch(getParties())
+    }, [dispatch])
 
     const apiKey = process.env.REACT_APP_GOOGLE_KEY
     return (
@@ -15,6 +27,16 @@ const HomeComponent = () => {
                     <p>
                         This is the modded jumbotron that occupies the entire horizontal space of its parent
                     </p>
+                    <div>
+                        {allUsers && 
+                        <h4>There are {Object.keys(allUsers).length} other users in your area.</h4>}
+                    </div>
+                    <div>
+                        {allParties && 
+                        <h4>There are {Object.keys(allParties).length} parties in your area.</h4>}
+                    </div>
+                    
+                    
                 </Container>
             </Jumbotron>
             <WrappedGoogleMap

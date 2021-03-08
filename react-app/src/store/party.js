@@ -1,5 +1,6 @@
 const CREATE_PARTY = "party/createNewParty"
 const GET_PARTY = "party/getSingleParty"
+const ALL_PARTIES = "party/getAllParties"
 
 const createNewParty = (party) => {
     return {
@@ -12,6 +13,13 @@ const getSingleParty = (party) => {
     return {
         type: GET_PARTY,
         payload: party
+    }
+}
+
+const getAllParties = (parties) => {
+    return {
+        type: ALL_PARTIES,
+        payload: parties
     }
 }
 
@@ -39,6 +47,13 @@ export const getParty = (id) => async (dispatch) => {
     return party
 }
 
+export const getParties = () => async (dispatch) => {
+    const response = await fetch("/api/parties")
+    const parties = await response.json()
+    dispatch(getAllParties(parties))
+    return parties
+}
+
 const initialState = {};
 
 const partyReducer = (state = initialState, action) => {
@@ -50,6 +65,9 @@ const partyReducer = (state = initialState, action) => {
             newState = { allParties: {...allParties,...newParty}}
             return newState
         case GET_PARTY:
+            newState = Object.assign({}, state, { ...action.payload })
+            return newState
+        case ALL_PARTIES:
             newState = Object.assign({}, state, { ...action.payload })
             return newState
         default:

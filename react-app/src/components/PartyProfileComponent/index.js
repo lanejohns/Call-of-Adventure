@@ -51,14 +51,14 @@ const PartyProfileComponent = () => {
                 <button onClick={handleSessions}>View your sessions</button>
             </div>
             }
-            {/* {sessions && 
+            {sessions && 
             Object.values(sessions).map((session) => (
                 <div>
                     <div>{session.title}</div>
                     <button onClick={(event) => handleDelete(session.id)}>Delete Session</button>
                 </div>
             ))
-            } */}
+            }
             {createSession == true && 
             <CreateSessionComponent />
             }

@@ -7,22 +7,22 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 const NavBar = ({ setAuthenticated }) => {
   return (
-    <Navbar style={{ height: 90, backgroundColor: "#292F36" }} variant="dark">
+    <Navbar sticky="top" style={{ height: 90, backgroundColor: "#292F36" }} variant="dark">
       <Navbar.Brand href="/" >Adventure Maps</Navbar.Brand>
-      <Nav.Link href="/party/partyId">Your Party</Nav.Link>
+      <Nav.Link href="/party/:partyId">Your Party</Nav.Link>
       <Nav.Link href="/party/create">Create a Party</Nav.Link>
       <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-        <NavLink to="/" exact={true} activeClassName="active">
+        <Nav.Link href="/" exact={true} activeClassName="active">
             Home
-          </NavLink>
+        </Nav.Link>
           <NavDropdown.Divider />
-          <NavLink to="/login" exact={true} activeClassName="active">
+          <Nav.Link href="/login" exact={true} activeClassName="active">
             Login
-          </NavLink>
+          </Nav.Link>
           <NavDropdown.Divider />
-          <NavLink to="/sign-up" exact={true} activeClassName="active">
+          <Nav.Link href="/sign-up" exact={true} activeClassName="active">
             Sign Up
-          </NavLink>
+          </Nav.Link>
           <NavDropdown.Divider />
           <LogoutButton setAuthenticated={setAuthenticated} />
       </NavDropdown>
