@@ -21,7 +21,6 @@ const PartyComponent = () => {
     const [partyMembers, setPartyMembers] = useState([])
 
     const handleSubmit = async (event) => {
-        console.log("HITTING HANDLESUBMIT")
         event.preventDefault()
         const newParty = {
             party_name: partyName,
@@ -29,7 +28,6 @@ const PartyComponent = () => {
             open_to_request: openToRequest,
             partyMembers
         }
-        console.log("GETTING THE NEWPARTY", newParty)
         await dispatch(createParty(newParty))
         history.push("/")
     }
@@ -37,7 +35,6 @@ const PartyComponent = () => {
     const addMember = (event) => {
         event.preventDefault()
         setPartyMembers([...partyMembers, selected])
-        console.log(partyMembers)
     }
 
     const removeMembers = (event) => {

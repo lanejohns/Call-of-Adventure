@@ -19,9 +19,7 @@ const GoogleMapComponent = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        // dispatch(getUsers())
         dispatch(getSessions(userPartyId))
-        console.log(userSessions)
     }, [dispatch])
 
     return (

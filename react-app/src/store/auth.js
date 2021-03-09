@@ -34,10 +34,8 @@ const signOutUser = (user) => {
 
 export const currentUser = () => async(dispatch) => {
     const response = await fetch("/api/auth/")
-    console.log("THIS IS THE CURRENT USER RESPONSE", response)
     if (response.ok) {
         const user = await response.json()
-        console.log("THIS IS THE CURRENT USER", user)
         return dispatch(getCurrentUser(user))
     }
 }

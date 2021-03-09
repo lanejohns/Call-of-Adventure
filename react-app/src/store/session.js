@@ -45,7 +45,6 @@ export const createSession = ({
     longitude,
     in_person,
 }) => async (dispatch) => {
-    console.log("WE ARE ABOUT TO FETCH FROM API/SESSIONS")
     const response = await fetch("/api/sessions/", {
         method: "POST",
         headers: {
@@ -66,7 +65,6 @@ export const createSession = ({
             in_person,
         }),
     });
-    console.log("THIS IS THE RESPONSE", response)
     const session = await response.json()
     dispatch(createNewSession(session))
 }
@@ -87,7 +85,6 @@ export const editSession = ({
     longitude,
     in_person,
 }) => async (dispatch) => {
-    console.log("WE ARE HITTING THE SESSION EDIT ROUTE")
     const response = await fetch(`/api/sessions/${session_id}/edit`, {
         method: "PUT",
         headers: {
@@ -109,7 +106,6 @@ export const editSession = ({
         }),
     });
     const session = await response.json()
-    console.log("THIS IS THE EDIT SESSION RESPONSE", session)
     dispatch(editTheSession(session))
 }
 
@@ -120,7 +116,6 @@ export const getSessions = (id) => async (dispatch) => {
 }
 
 export const deleteSession = (id) => async (dispatch) => {
-    console.log("WE ARE HITTING THE DELETE THUNK", id)
     const response = await fetch(`/api/sessions/${id}`, {
         method: "DELETE",
         headers: {
