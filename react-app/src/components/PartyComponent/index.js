@@ -12,6 +12,8 @@ const PartyComponent = () => {
 
     const allUsers = useSelector((state) => state.users.users);
 
+
+
     const [partyName, setPartyName] = useState("")
     const [partySize, setPartySize] = useState(4)
     const [openToRequest, setOpenToRequest] = useState(false)
@@ -19,7 +21,6 @@ const PartyComponent = () => {
     const [partyMembers, setPartyMembers] = useState([])
 
     const handleSubmit = async (event) => {
-        console.log("HITTING HANDLESUBMIT")
         event.preventDefault()
         const newParty = {
             party_name: partyName,
@@ -27,7 +28,6 @@ const PartyComponent = () => {
             open_to_request: openToRequest,
             partyMembers
         }
-        console.log("GETTING THE NEWPARTY", newParty)
         await dispatch(createParty(newParty))
         history.push("/")
     }
@@ -35,7 +35,11 @@ const PartyComponent = () => {
     const addMember = (event) => {
         event.preventDefault()
         setPartyMembers([...partyMembers, selected])
-        console.log(partyMembers)
+    }
+
+    const removeMembers = (event) => {
+        event.preventDefault()
+        setPartyMembers([])
     }
 
     useEffect(() => {
@@ -60,6 +64,13 @@ const PartyComponent = () => {
                             ))
                         }
                     </select>
+                <label>Selected Party Members</label>
+                    <div className="party-members">
+                        {partyMembers.length > 0 && partyMembers.map((member) => (
+                            <h5 key={member}>{member}</h5>
+                        ))}
+                        <button onClick={event => removeMembers(event)}>Discard party</button>
+                    </div>
                     <button onClick={addMember}>Add Party Member</button>
                 <button>Submit</button>
             </form>

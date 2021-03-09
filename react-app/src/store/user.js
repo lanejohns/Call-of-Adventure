@@ -8,7 +8,7 @@ const getAllUsers = (users) => {
 }
 
 export const getUsers = () => async (dispatch) => {
-    const response = await fetch("/api/users")
+    const response = await fetch("/api/users/")
     const users = await response.json()
     return dispatch(getAllUsers(users))
 }

@@ -17,7 +17,7 @@ class Party(db.Model):
     request = db.relationship("Request", back_populates="party")
 
     host = db.relationship("User", back_populates = "hosted_parties")
-    party_members = db.relationship("User", secondary=party_users, back_populates="member_parties")
+    party_members = db.relationship("User", secondary=party_users, back_populates="member_parties", lazy="dynamic")
 
 
     def to_dict(self):

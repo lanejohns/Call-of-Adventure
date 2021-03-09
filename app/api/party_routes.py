@@ -12,7 +12,7 @@ def all_parties():
 
 
 @party_routes.route('/', methods=["POST"])
-@login_required
+# @login_required
 def create_party():
     print("WE ARE HITTING THE START OF THE API ROUTE")
     form = PartyForm()
@@ -48,7 +48,10 @@ def delete_party(id):
 
 @party_routes.route('/<id>')
 def single_party(id):
+    # print("THIS IS THE CURRENT USER ID",current_user.id)
     party = Party.query.get(id)
+    # query = party.party_members.all()
+    # print([member.to_dict() for member in query])
     return {'party': party.to_dict()}
 
 

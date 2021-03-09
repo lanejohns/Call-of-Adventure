@@ -1,20 +1,26 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { login } from "../../services/auth";
+import { loginThunk } from "../../store/auth"
 
-const LoginForm = ({ authenticated, setAuthenticated }) => {
+const LoginForm = () => {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const theUser = useSelector(state => state.currentUser.id)
+
+  const dispatch = useDispatch()
 
   const onLogin = async (e) => {
     e.preventDefault();
-    const user = await login(email, password);
-    if (!user.errors) {
-      setAuthenticated(true);
-    } else {
-      setErrors(user.errors);
-    }
+    // const user = await login(email, password);
+    dispatch(loginThunk(email, password))
+    // if (!user.errors) {
+    //   setAuthenticated(true);
+    // } else {
+    //   setErrors(user.errors);
+    // }
   };
 
   const updateEmail = (e) => {
@@ -25,7 +31,7 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
     setPassword(e.target.value);
   };
 
-  if (authenticated) {
+  if (theUser) {
     return <Redirect to="/" />;
   }
 
