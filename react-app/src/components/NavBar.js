@@ -10,7 +10,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 const NavBar = () => {
 
-  const theUser = useSelector(state => state.currentUser.id)
+  const theUser = useSelector(state => state.currentUser)
   const dispatch = useDispatch()
 
       useEffect(() => {
@@ -21,7 +21,7 @@ const NavBar = () => {
   return (
     <Navbar sticky="top" style={{ height: 90, backgroundColor: "#292F36" }} variant="dark">
       <Navbar.Brand href="/" >Adventure Maps</Navbar.Brand>
-      <Nav.Link href={`/party/${partyId}`}>Your Party</Nav.Link>
+      <Nav.Link href={`/party/${theUser.party_id}`}>Your Party</Nav.Link>
       <Nav.Link href="/party/create">Create a Party</Nav.Link>
       <NavDropdown title="Dropdown" id="basic-nav-dropdown">
         <Nav.Link href="/" exact={true} activeClassName="active">

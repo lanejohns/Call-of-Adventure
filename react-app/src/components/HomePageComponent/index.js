@@ -13,12 +13,12 @@ const HomeComponent = () => {
     const dispatch = useDispatch()
     const allUsers = useSelector((state) => state.users.users);
     const allParties = useSelector(state => state.parties.all_parties)
-    const theUser = useSelector(state => state.currentUser.id)
+    // const theUser = useSelector(state => state.currentUser.id)
 
     useEffect(() => {
         dispatch(getUsers())
         // dispatch(getParties())
-        dispatch(currentUser())
+        // dispatch(currentUser())
     }, [dispatch])
 
 
@@ -43,12 +43,12 @@ const HomeComponent = () => {
                     
                 </Container>
             </Jumbotron>
-            <WrappedGoogleMap
+            {/* <WrappedGoogleMap
                 googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${apiKey}`}
                 loadingElement={<div style={{ height: "400px" }} />}
                 containerElement={<div style={{ height: "800px" }} />}
                 mapElement={<div style={{ height: "800px" }} />}
-            />
+            /> */}
         </div>
     )
 }

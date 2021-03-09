@@ -14,7 +14,6 @@ def all_sessions():
 @session_routes.route('/', methods=["POST"])
 def create_session():
     form = SessionForm()
-    print("THIS IS THE FORM", form.data)
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         session = Session(
@@ -37,6 +36,28 @@ def create_session():
         return {"session": session.to_dict()}
     return {"errors": "set errors here"}
 
+
+@session_routes.route('/<id>/edit', methods=["PUT"])
+def edit_session(id):
+    print("WE ARE HITTING THE EDIT SESSION ROUTE")
+    session = Session.query.filter(Session.id == id).first()
+    new_session = request.get_json()
+
+    session.title = new_session["title"]
+    session.description = new_session["description"]
+    session.date = new_session["date"]
+    session.time = new_session["time"]
+    session.address = new_session["address"]
+    session.city = new_session["city"]
+    session.state = new_session["state"]
+    session.zipcode = new_session["zipcode"]
+    session.latitude = new_session["latitude"]
+    session.longitude = new_session["longitude"]
+    session.in_person = new_session["in_person"]
+    print("THIS SHOULD BE THE NEW SESSION", session)
+
+    db.session.commit()
+    return {"session": session.to_dict()}
 
 @session_routes.route('/<id>', methods=['DELETE'])
 def delete_session(id):

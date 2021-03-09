@@ -43,6 +43,10 @@ class User(db.Model, UserMixin):
 
 
   def to_dict(self):
+    if self.member_parties:
+      party_id = self.member_parties[0].id
+    else:
+      party_id = None
     return {
       "id": self.id,
       "full_name": self.full_name,
@@ -53,5 +57,6 @@ class User(db.Model, UserMixin):
       "zipcode": self.zipcode,
       "latitude": self.latitude,
       "longitude": self.longitude,
-      "email": self.email
+      "email": self.email,
+      "party_id": party_id
     }

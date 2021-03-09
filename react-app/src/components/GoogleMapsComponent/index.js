@@ -7,15 +7,21 @@ import {
   Marker,
   InfoWindow,
 } from "react-google-maps";
-import { getUsers } from "../../store/user"
+
+// import { getUsers } from "../../store/user"
+import { getSessions } from "../../store/session"
 
 
 const GoogleMapComponent = () => {
     const allUsers = useSelector((state) => state.users.users);
+    const userPartyId = useSelector(state => state.currentUser.party_id)
+    const userSessions = useSelector(state => state.sessions.all_sessions)
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(getUsers())
+        // dispatch(getUsers())
+        dispatch(getSessions(userPartyId))
+        console.log(userSessions)
     }, [dispatch])
 
     return (
@@ -24,11 +30,11 @@ const GoogleMapComponent = () => {
         defaultCenter={{lat: 42.3551, lng: -71.0656}}
         // defaultOptions={{styles:mapStyles}}
         >
-            {allUsers && 
-            Object.values(allUsers).map((user) => (
+            {userSessions && 
+            Object.values(userSessions).map((session) => (
                 <Marker 
-                key={user.id}
-                position={{ lat: user.latitude, lng: user.longitude }}
+                key={session.id}
+                position={{ lat: session.latitude, lng: session.longitude }}
                 />
             ))
             }

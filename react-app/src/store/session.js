@@ -1,6 +1,7 @@
 const CREATE_SESSION = "session/createNewSession"
 const LOAD = "session/getAllSessions"
 const DELETE = "session/deleteOneSession"
+const EDIT = "session/editTheSession"
 
 const createNewSession = (session) => {
     return {
@@ -19,6 +20,13 @@ const getAllSessions = (sessions) => {
 const deleteOneSession = (session) => {
     return {
         type: DELETE,
+        payload: session
+    }
+}
+
+const editTheSession = (session) => {
+    return {
+        type: EDIT,
         payload: session
     }
 }
@@ -61,6 +69,48 @@ export const createSession = ({
     console.log("THIS IS THE RESPONSE", response)
     const session = await response.json()
     dispatch(createNewSession(session))
+}
+
+
+export const editSession = ({
+    session_id,
+    party_id,
+    title,
+    description,
+    date,
+    time,
+    address,
+    city,
+    state,
+    zipcode,
+    latitude,
+    longitude,
+    in_person,
+}) => async (dispatch) => {
+    console.log("WE ARE HITTING THE SESSION EDIT ROUTE")
+    const response = await fetch(`/api/sessions/${session_id}/edit`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            party_id,
+            title,
+            description,
+            date,
+            time,
+            address,
+            city,
+            state,
+            zipcode,
+            latitude,
+            longitude,
+            in_person,
+        }),
+    });
+    const session = await response.json()
+    console.log("THIS IS THE EDIT SESSION RESPONSE", session)
+    dispatch(editTheSession(session))
 }
 
 export const getSessions = (id) => async (dispatch) => {

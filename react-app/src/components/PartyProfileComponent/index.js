@@ -31,10 +31,6 @@ const PartyProfileComponent = () => {
         setViewSessions(!viewSessions)
     }
 
-    const handleDelete = (id) => {
-        dispatch(deleteSession(id))
-        history.push(`/party/${partyId}`)
-    }
 
     useEffect(() => {
         dispatch(getParty(partyId))
@@ -50,10 +46,10 @@ const PartyProfileComponent = () => {
                 <button onClick={handleSessions}>View your sessions</button>
             </div>
             }
-            {createSession == true && 
+            {createSession === true && 
             <CreateSessionComponent />
             }
-            {viewSessions == true && 
+            {viewSessions === true && 
             <PartySessionsComponent partyId={partyId}/>
             }
             <WrappedGoogleMap

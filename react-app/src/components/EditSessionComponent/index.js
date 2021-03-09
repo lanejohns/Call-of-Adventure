@@ -5,11 +5,10 @@ import { enGB } from 'date-fns/locale'
 import { DatePicker, DatePickerCalendar } from 'react-nice-dates'
 import Geocode from "react-geocode";
 
-import { createSession } from "../../../store/session"
+import { editSession } from "../../store/session"
 import 'react-nice-dates/build/style.css'
 
-const CreateSessionComponent = () => {
-
+const EditSessionComponent = ({session}) => {
     const dispatch = useDispatch()
     const apiKey = process.env.REACT_APP_GOOGLE_KEY
     const partyId = Number.parseInt(useParams().partyId)
@@ -18,7 +17,7 @@ const CreateSessionComponent = () => {
     Geocode.setLanguage("en");
     Geocode.setLocationType("ROOFTOP");
 
-      const states = [
+          const states = [
     "AL",
     "AK",
     "AZ",
@@ -71,15 +70,16 @@ const CreateSessionComponent = () => {
     "WY",
   ];
 
-    const [title, setTitle] = useState("")
-    const [description, setDescription] = useState("")
+    const [title, setTitle] = useState(session.title)
+    const [description, setDescription] = useState(session.description)
     const [date, setDate] = useState()
-    const [time, setTime] = useState("")
-    const [address, setAddress] = useState("")
-    const [city, setCity] = useState("")
-    const [state, setState] = useState(states[0])
-    const [zipcode, setZipcode] = useState("")
-    const [inPerson, setInPerson] = useState(false)
+    const [time, setTime] = useState(session.time)
+    const [address, setAddress] = useState(session.address)
+    const [city, setCity] = useState(session.city)
+    const [state, setState] = useState(session.state)
+    const [zipcode, setZipcode] = useState(session.zipcode)
+    const [inPerson, setInPerson] = useState(session.inPerson)
+
 
     const getLat = (address, city, state, zipcode) => {
         return Geocode.fromAddress(`${address} ${city}, ${state} ${zipcode}`).then(
@@ -110,6 +110,7 @@ const CreateSessionComponent = () => {
         const lat = await getLat(address, city, state, zipcode);
         const lng = await getLng(address, city, state, zipcode);
         const newSession = {
+            session_id : session.id,
             party_id: partyId,
             title,
             description,
@@ -123,7 +124,7 @@ const CreateSessionComponent = () => {
             longitude: lng,
             in_person: inPerson
         }
-        dispatch(createSession(newSession))
+        dispatch(editSession(newSession))
         window.location.reload(false)
     }
 
@@ -186,4 +187,4 @@ const CreateSessionComponent = () => {
     )
 }
 
-export default CreateSessionComponent
+export default EditSessionComponent
