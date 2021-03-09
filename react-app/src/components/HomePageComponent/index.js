@@ -6,17 +6,21 @@ import Container from 'react-bootstrap/Jumbotron'
 import { WrappedGoogleMap } from "../GoogleMapsComponent"
 import { getUsers } from "../../store/user"
 import { getParties } from "../../store/party"
+import { currentUser } from "../../store/auth"
 
 const HomeComponent = () => {
 
     const dispatch = useDispatch()
     const allUsers = useSelector((state) => state.users.users);
     const allParties = useSelector(state => state.parties.all_parties)
+    const theUser = useSelector(state => state.currentUser.id)
 
     useEffect(() => {
         dispatch(getUsers())
-        dispatch(getParties())
+        // dispatch(getParties())
+        dispatch(currentUser())
     }, [dispatch])
+
 
     const apiKey = process.env.REACT_APP_GOOGLE_KEY
     return (

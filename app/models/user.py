@@ -23,7 +23,7 @@ class User(db.Model, UserMixin):
   request = db.relationship("Request", back_populates="requester")
 
   hosted_parties = db.relationship("Party", back_populates = "host")
-  member_parties = db.relationship("Party", secondary=party_users, back_populates="party_members")
+  member_parties = db.relationship("Party", secondary=party_users, back_populates="party_members", lazy="dynamic")
 
   @property
   def password(self):
@@ -37,6 +37,9 @@ class User(db.Model, UserMixin):
 
   def check_password(self, password):
     return check_password_hash(self.password, password)
+
+  def get_party_id(self):
+    return self.member_parties
 
 
   def to_dict(self):

@@ -4,11 +4,13 @@ import thunk from "redux-thunk";
 import partyReducer from "./party"
 import userReducer from "./user";
 import sessionReducer from "./session"
+import currentUserReducer from "./auth"
 
 const rootReducer = combineReducers({
   parties: partyReducer,
   users: userReducer,
-  sessions: sessionReducer
+  sessions: sessionReducer,
+  currentUser: currentUserReducer
 })
 
 let enhancer;

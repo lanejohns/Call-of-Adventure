@@ -106,7 +106,6 @@ const CreateSessionComponent = () => {
          };
 
     const handleSubmit = async (event) => {
-        console.log("WE ARE HITTING THE HANDLE SUBMIT")
         event.preventDefault()
         const lat = await getLat(address, city, state, zipcode);
         const lng = await getLng(address, city, state, zipcode);
@@ -124,8 +123,6 @@ const CreateSessionComponent = () => {
             longitude: lng,
             in_person: inPerson
         }
-        console.log("THIS IS THE IN PERSON ANSWER", inPerson)
-        console.log("WE ARE ABOUT TO CREATE SESSION", newSession)
         dispatch(createSession(newSession))
     }
 

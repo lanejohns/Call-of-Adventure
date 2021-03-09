@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { Provider as ReduxProvider } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import LoginForm from "./components/auth/LoginForm";
 import SignUpForm from "./components/auth/SignUpForm";
@@ -12,60 +12,50 @@ import PartyComponent from "./components/PartyComponent/index.js"
 import HomeComponent from "./components/HomePageComponent/index.js"
 import PartyProfileComponent from "./components/PartyProfileComponent/index.js"
 import { authenticate } from "./services/auth";
-import configureStore from "./store";
+import { currentUser } from "./store/auth"
 
-const store = configureStore();
 
 function App() {
-  const [authenticated, setAuthenticated] = useState(false);
+  // const [authenticated, setAuthenticated] = useState(false);
   const [loaded, setLoaded] = useState(false);
 
-  useEffect(() => {
-    (async() => {
-      const user = await authenticate();
-      if (!user.errors) {
-        setAuthenticated(true);
-      }
-      setLoaded(true);
-    })();
-  }, []);
+  const dispatch = useDispatch()
 
+  
+  useEffect(() => {
+    dispatch(currentUser()).then(() => setLoaded(true))
+  }, [dispatch])
+  
   if (!loaded) {
     return null;
   }
-
   return (
-    <ReduxProvider store={store}>
       <BrowserRouter>
-        <NavBar setAuthenticated={setAuthenticated} />
+        <NavBar />
         <Switch>
           <Route path="/login" exact={true}>
-            <LoginForm
-              authenticated={authenticated}
-              setAuthenticated={setAuthenticated}
-            />
+            <LoginForm/>
           </Route>
           <Route path="/sign-up" exact={true}>
-            <SignUpForm authenticated={authenticated} setAuthenticated={setAuthenticated} />
+            <SignUpForm />
           </Route>
-          <ProtectedRoute path="/users" exact={true} authenticated={authenticated}>
+          <ProtectedRoute path="/users" exact={true} >
             <UsersList/>
           </ProtectedRoute>
-          <ProtectedRoute path="/users/:userId" exact={true} authenticated={authenticated}>
+          <ProtectedRoute path="/users/:userId" exact={true} >
             <User />
           </ProtectedRoute>
-          <ProtectedRoute path="/" exact={true} authenticated={authenticated}>
+          <ProtectedRoute path="/" exact={true} >
             <HomeComponent />
           </ProtectedRoute>
-          <ProtectedRoute path="/party/create" exact={true} authenticated={authenticated}>
+          <ProtectedRoute path="/party/create" exact={true} >
             <PartyComponent />
           </ProtectedRoute>
-          <ProtectedRoute path="/party/:partyId" exact={true} authenticated={authenticated}>
+          <ProtectedRoute path="/party/:partyId" exact={true} >
             <PartyProfileComponent />
           </ProtectedRoute>
         </Switch>
       </BrowserRouter>
-    </ReduxProvider>
   );
 }
 

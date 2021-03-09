@@ -9,13 +9,13 @@ const PartySessionsComponent = ({partyId}) => {
     const sessions = useSelector(state => state.sessions.all_sessions)
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        dispatch(getSessions(partyId))
-    }, [dispatch])
+    // useEffect(() => {
+    //     dispatch(getSessions(partyId))
+    // }, [dispatch])
 
     const handleDelete = (id) => {
         dispatch(deleteSession(id))
-        // dispatch(getSessions(partyId))
+        dispatch(getSessions(partyId))
     }
     
     return (
