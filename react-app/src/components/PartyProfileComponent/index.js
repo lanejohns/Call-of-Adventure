@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 import { WrappedGoogleMap } from "../GoogleMapsComponent"
 import { getParty } from "../../store/party"
 import { getSessions, deleteSession } from "../../store/session"
+import { deleteThunk } from "../../store/party"
 import CreateSessionComponent from "../SessionComponent/CreateSessionComponent/index"
 import PartySessionsComponent from "../PartySessionsComponent/index"
 import "./PartyProfile.css"
@@ -31,6 +32,10 @@ const PartyProfileComponent = () => {
         setViewSessions(!viewSessions)
     }
 
+    const handleDelete = () => {
+        dispatch(deleteThunk(partyId))
+    }
+
 
     useEffect(() => {
         dispatch(getParty(partyId))
@@ -42,6 +47,7 @@ const PartyProfileComponent = () => {
             {party && 
             <div>
                 <h1>{party.party_name}</h1>
+                <button onClick={handleDelete}>Delete your party</button>
                 <button onClick={handleClick}>Make a session</button>
                 <button onClick={handleSessions}>View your sessions</button>
             </div>

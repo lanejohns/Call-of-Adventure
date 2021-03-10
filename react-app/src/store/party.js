@@ -1,6 +1,7 @@
 const CREATE_PARTY = "party/createNewParty"
 const GET_PARTY = "party/getSingleParty"
 const ALL_PARTIES = "party/getAllParties"
+const DELETE_PARTY = "party/deleteParty"
 
 const createNewParty = (party) => {
     return {
@@ -20,6 +21,13 @@ const getAllParties = (parties) => {
     return {
         type: ALL_PARTIES,
         payload: parties
+    }
+}
+
+const deleteParty = (party) => {
+    return {
+        type: DELETE_PARTY,
+        payload: party
     }
 }
 
@@ -51,6 +59,18 @@ export const getParties = () => async (dispatch) => {
     return parties
 }
 
+export const deleteThunk = (id) => async (dispatch) => {
+    const response = await fetch(`api/parties/${id}`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json"
+        },
+    })
+    const party = await response.json()
+    dispatch(deleteParty(party))
+    return party
+}
+
 const initialState = {};
 
 const partyReducer = (state = initialState, action) => {
@@ -66,6 +86,11 @@ const partyReducer = (state = initialState, action) => {
             return newState
         case ALL_PARTIES:
             newState = Object.assign({}, state, { ...action.payload })
+            return newState
+        case DELETE_PARTY:
+            const deleted_party = action.payload.party
+            newState = Object.assign({}, state)
+            delete newState.appParties[deleted_party.id]
             return newState
         default:
             return state
