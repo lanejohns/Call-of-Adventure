@@ -43,9 +43,11 @@ class User(db.Model, UserMixin):
 
 
   def to_dict(self):
-    if self.member_parties:
+    # print("THIS IS THE LENGTH OF MEMBER PARTIES",len(self.member_parties))
+    try:
+      # print("MEMBER PARTIES PRINT ------------->",self.member_parties)
       party_id = self.member_parties[0].id
-    else:
+    except (TypeError, IndexError):
       party_id = None
     return {
       "id": self.id,
