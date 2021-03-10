@@ -34,6 +34,7 @@ const PartyProfileComponent = () => {
 
     const handleDelete = () => {
         dispatch(deleteThunk(partyId))
+        history.push("/")
     }
 
 

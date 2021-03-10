@@ -60,12 +60,13 @@ export const getParties = () => async (dispatch) => {
 }
 
 export const deleteThunk = (id) => async (dispatch) => {
-    const response = await fetch(`api/parties/${id}`, {
+    const response = await fetch(`/api/parties/${id}`, {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json"
         },
     })
+    console.log("DELETETHUNK RESPONSE", response)
     const party = await response.json()
     dispatch(deleteParty(party))
     return party
@@ -90,7 +91,8 @@ const partyReducer = (state = initialState, action) => {
         case DELETE_PARTY:
             const deleted_party = action.payload.party
             newState = Object.assign({}, state)
-            delete newState.appParties[deleted_party.id]
+            const all_parties = state.allParties
+            // delete newState.all_parties[deleted_party.id]
             return newState
         default:
             return state

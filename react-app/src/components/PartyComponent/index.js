@@ -11,6 +11,7 @@ const PartyComponent = () => {
     const history = useHistory()
 
     const allUsers = useSelector((state) => state.users.users);
+    const theUser = useSelector((state) => state.currentUser)
 
 
 
@@ -18,7 +19,7 @@ const PartyComponent = () => {
     const [partySize, setPartySize] = useState(4)
     const [openToRequest, setOpenToRequest] = useState(false)
     const [selected, setSelected] = useState("")
-    const [partyMembers, setPartyMembers] = useState([])
+    const [partyMembers, setPartyMembers] = useState([theUser.username])
 
     const handleSubmit = async (event) => {
         event.preventDefault()
