@@ -14,7 +14,7 @@ const LogoutButton = () => {
   const onLogout = async (e) => {
     // await logout();
     // setAuthenticated(false);
-    dispatch(logoutThunk())
+    await dispatch(logoutThunk())
     // return <Redirect to="/" />
     window.location.reload(false)
   };

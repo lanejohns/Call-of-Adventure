@@ -13,6 +13,12 @@ def users():
     print(users)
     return {"users": {user.id: user.to_dict() for user in users}}
 
+@user_routes.route('/<user>')
+def searched_user(user):
+    users = User.query.filter(User.username.ilike(f"%{user}%"))
+    return {"searched_users": {user.id: user.to_dict() for user in users }}
+
+
 
 @user_routes.route('/<int:id>')
 @login_required
