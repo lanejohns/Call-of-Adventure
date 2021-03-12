@@ -17,6 +17,7 @@ const PartyProfileComponent = () => {
     const dispatch = useDispatch()
     const party = useSelector(state => state.parties.party)
     const sessions = useSelector(state => state.sessions.all_sessions)
+    const members = useSelector(state => state.users.members)
     const partyId = Number.parseInt(useParams().partyId)
     const history = useHistory()
     const apiKey = process.env.REACT_APP_GOOGLE_KEY
@@ -50,7 +51,10 @@ const PartyProfileComponent = () => {
             {party && 
             <div>
                 <h1>{party.party_name}</h1>
-                <h3></h3>
+                <h1>Party Members</h1>
+                {members && members.map((member) => (
+                    <h3>{member.username}</h3>
+                ))}
                 <button onClick={handleDelete}>Delete your party</button>
                 <button onClick={handleClick}>Make a session</button>
                 <button onClick={handleSessions}>View your sessions</button>
