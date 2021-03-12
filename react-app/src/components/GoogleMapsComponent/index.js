@@ -8,7 +8,6 @@ import {
   InfoWindow,
 } from "react-google-maps";
 
-// import { getUsers } from "../../store/user"
 import { getSessions } from "../../store/session"
 
 
