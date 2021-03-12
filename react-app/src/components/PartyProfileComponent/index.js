@@ -7,6 +7,7 @@ import { WrappedGoogleMap } from "../GoogleMapsComponent"
 import { getParty } from "../../store/party"
 import { getSessions, deleteSession } from "../../store/session"
 import { deleteThunk } from "../../store/party"
+import { getMembers } from "../../store/user"
 import CreateSessionComponent from "../SessionComponent/CreateSessionComponent/index"
 import PartySessionsComponent from "../PartySessionsComponent/index"
 import "./PartyProfile.css"
@@ -41,6 +42,7 @@ const PartyProfileComponent = () => {
     useEffect(() => {
         dispatch(getParty(partyId))
         dispatch(getSessions(partyId))
+        dispatch(getMembers(partyId))
     }, [dispatch])
 
     return (
@@ -48,6 +50,7 @@ const PartyProfileComponent = () => {
             {party && 
             <div>
                 <h1>{party.party_name}</h1>
+                <h3></h3>
                 <button onClick={handleDelete}>Delete your party</button>
                 <button onClick={handleClick}>Make a session</button>
                 <button onClick={handleSessions}>View your sessions</button>
