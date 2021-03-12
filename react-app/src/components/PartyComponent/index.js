@@ -4,14 +4,17 @@ import { useHistory } from "react-router-dom";
 
 import { getUsers } from "../../store/user"
 import { createParty } from "../../store/party"
+import SearchBarComponent from "../SearchBarComponent/index"
+import SearchResultComponent from "../SearchResultComponent/index"
 import "./PartyComponent.css"
 
 const PartyComponent = () => {
     const dispatch = useDispatch()
     const history = useHistory()
 
-    const allUsers = useSelector((state) => state.users.users);
+    // const allUsers = useSelector((state) => state.users.users);
     const theUser = useSelector((state) => state.currentUser)
+    let searchedUsers = useSelector((state) => state.users.searched_users)
 
 
 
@@ -33,8 +36,9 @@ const PartyComponent = () => {
         history.push("/")
     }
 
-    const addMember = (event) => {
+    const addMember = (event, username) => {
         event.preventDefault()
+        setSelected(username)
         setPartyMembers([...partyMembers, selected])
     }
 
@@ -58,13 +62,13 @@ const PartyComponent = () => {
                 <label>Is your party open to Requests?</label>
                     <input type="checkbox" value={openToRequest} onChange={(event) => setOpenToRequest(!openToRequest)}/>
                 <label>Party Members</label>
-                    <select value={selected} onChange={event => setSelected(event.target.value)}>
-                        {allUsers && 
-                            Object.values(allUsers).map((user) => (
-                                <option value={user.username} key={user.id}>{user.username}</option>
-                            ))
-                        }
-                    </select>
+                    <SearchBarComponent />
+                    {searchedUsers && Object.values(searchedUsers).map((user) => (
+                        <div>
+                            <h5 value={user.username} key={user}>{user.username}</h5>
+                            <button key={user.id} onClick={(event) => addMember(event, user.username)}>Add Party Member</button>
+                        </div>
+                    ))}
                 <label>Selected Party Members</label>
                     <div className="party-members">
                         {partyMembers.length > 0 && partyMembers.map((member) => (
@@ -72,7 +76,6 @@ const PartyComponent = () => {
                         ))}
                         <button onClick={event => removeMembers(event)}>Discard party</button>
                     </div>
-                    <button onClick={addMember}>Add Party Member</button>
                 <button>Submit</button>
             </form>
         </div>

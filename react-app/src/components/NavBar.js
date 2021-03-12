@@ -16,13 +16,30 @@ const NavBar = () => {
       useEffect(() => {
         dispatch(currentUser())
     }, [dispatch])
+  
+  let sessionLinks;
+  if (theUser.party_id != null) {
+    sessionLinks = (
+    <>
+      <Nav.Link href={`/party/${theUser.party_id}`}>Your Party</Nav.Link>
+    </>
+    )
+  } else {
+    sessionLinks = (
+      <>
+        <Nav.Link href="/party/create">Create a Party</Nav.Link>
+      </>
+    )
+  }
+  
 
   const partyId = 1
   return (
     <Navbar sticky="top" style={{ height: 90, backgroundColor: "#292F36" }} variant="dark">
       <Navbar.Brand href="/" >Adventure Maps</Navbar.Brand>
-      <Nav.Link href={`/party/${theUser.party_id}`}>Your Party</Nav.Link>
-      <Nav.Link href="/party/create">Create a Party</Nav.Link>
+      {/* <Nav.Link href={`/party/${theUser.party_id}`}>Your Party</Nav.Link>
+      <Nav.Link href="/party/create">Create a Party</Nav.Link> */}
+      {theUser && sessionLinks}
       <NavDropdown title="Dropdown" id="basic-nav-dropdown">
         <Nav.Link href="/" exact={true} activeClassName="active">
             Home
