@@ -31,6 +31,13 @@ const deleteParty = (party) => {
     }
 }
 
+// const getPartyMembers = (members) => {
+//     return {
+//         type: GET_MEMBERS,
+//         payload: members
+//     }
+// }
+
 
 export const createParty = (payload) => async (dispatch) => {
     const response = await fetch("/api/parties/", {
@@ -52,6 +59,13 @@ export const getParty = (id) => async (dispatch) => {
     return party
 }
 
+// export const getMembers = (id) => async (dispatch) => {
+//     const response = await fetch(`/api/parties/${id}/members`)
+//     const members = await response.json()
+//     dispatch(getPartyMembers(members))
+//     return members
+// }
+
 export const getParties = () => async (dispatch) => {
     const response = await fetch("/api/parties")
     const parties = await response.json()
@@ -66,7 +80,7 @@ export const deleteThunk = (id) => async (dispatch) => {
             "Content-Type": "application/json"
         },
     })
-    console.log("DELETETHUNK RESPONSE", response)
+    
     const party = await response.json()
     dispatch(deleteParty(party))
     return party

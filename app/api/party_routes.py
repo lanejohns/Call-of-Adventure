@@ -49,13 +49,24 @@ def delete_party(id):
     db.session.commit()
     return {'party': party.to_dict()}
 
+# @party_routes.route('/<id>/members')
+# def party_members(id):
+#     # print("THIS IS THE CURRENT USER ID",current_user.id)
+#     party = Party.query.get(id)
+#     query = party.party_members.all()
+#     print("THIS IS THE MEMBER QUERY", query)
+#     print([member.to_dict() for member in members])
+#     return {'member': member.to_dict()}
 
 @party_routes.route('/<id>')
 def single_party(id):
     # print("THIS IS THE CURRENT USER ID",current_user.id)
     party = Party.query.get(id)
     # query = party.party_members.all()
+    # print("THIS IS THE MEMBER QUERY", query)
     # print([member.to_dict() for member in query])
     return {'party': party.to_dict()}
+
+
 
 
