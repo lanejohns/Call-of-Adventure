@@ -24,8 +24,6 @@ def searched_user(user):
 def party_members(id):
     party = Party.query.get(id)
     members = party.party_members.all()
-    print("THIS IS THE MEMBER QUERY", members)
-    print([member.to_dict() for member in members])
     return {'members': [member.to_dict() for member in members]}
 
 
