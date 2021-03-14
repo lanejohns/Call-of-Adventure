@@ -36,7 +36,7 @@ const NavBar = () => {
   const partyId = 1
   return (
     <Navbar sticky="top" style={{ height: 90, backgroundColor: "#292F36" }} variant="dark">
-      <Navbar.Brand href="/" >Adventure Maps</Navbar.Brand>
+      <Navbar.Brand href="/" >Call of Adventure</Navbar.Brand>
       {/* <Nav.Link href={`/party/${theUser.party_id}`}>Your Party</Nav.Link>
       <Nav.Link href="/party/create">Create a Party</Nav.Link> */}
       {theUser && sessionLinks}

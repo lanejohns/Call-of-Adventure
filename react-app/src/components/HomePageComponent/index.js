@@ -13,7 +13,7 @@ const HomeComponent = () => {
     const dispatch = useDispatch()
     const allUsers = useSelector((state) => state.users.users);
     const allParties = useSelector(state => state.parties.all_parties)
-    // const theUser = useSelector(state => state.currentUser.id)
+    const theUser = useSelector((state) => state.currentUser)
 
     useEffect(() => {
         dispatch(getUsers())
@@ -28,6 +28,9 @@ const HomeComponent = () => {
             <Jumbotron fluid>
                 <Container>
                     <h1>This is the Jumbotron</h1>
+                    {theUser.id && 
+                    <p>Welcome {theUser.username}!</p>
+                    }
                     <p>
                         This is the modded jumbotron that occupies the entire horizontal space of its parent
                     </p>
