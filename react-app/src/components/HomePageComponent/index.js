@@ -28,12 +28,12 @@ const HomeComponent = () => {
         <div>
             <Jumbotron fluid>
                 <Container>
-                    <h1>This is the Jumbotron</h1>
+                    <h1>Call of Adventure</h1>
                     {theUser.id && 
                     <p>Welcome {theUser.username}!</p>
                     }
                     <p>
-                        This is the modded jumbotron that occupies the entire horizontal space of its parent
+                        Check out the map below and get your tabletop games rolling!
                     </p>
                     <div>
                         {allUsers && 
