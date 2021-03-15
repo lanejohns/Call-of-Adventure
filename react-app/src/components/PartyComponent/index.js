@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom";
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
+import Col from 'react-bootstrap/Col'
 
 import { getUsers } from "../../store/user"
 import { createParty } from "../../store/party"
@@ -52,32 +55,47 @@ const PartyComponent = () => {
     }, [dispatch])
 
     return (
-        <div>
-            <h1>This is the Party Component!</h1>
-            <form onSubmit={handleSubmit}>
-                <label>Party Name</label>
-                    <input value={partyName} onChange={(event) => setPartyName(event.target.value)} placeholder="Party Name"/>
-                <label>Party Size</label>
-                    <input value={partySize} onChange={(event) => setPartySize(event.target.value)}/>
-                <label>Is your party open to Requests?</label>
-                    <input type="checkbox" value={openToRequest} onChange={(event) => setOpenToRequest(!openToRequest)}/>
-                <label>Party Members</label>
+        <div className="party-body">
+            <Form onSubmit={handleSubmit} className="text-center container">
+                <Form.Row className="align-items-center">
+                <Form.Group className="party-name-input">
+                    <Form.Label >Party Name</Form.Label>
+                    <Form.Control value={partyName} onChange={(event) => setPartyName(event.target.value)} placeholder="Party Name"/>
+                </Form.Group>
+
+                <Form.Group>
+                    <Form.Label>Party Size</Form.Label>
+                    <Form.Control value={partySize} onChange={(event) => setPartySize(event.target.value)}/>
+                </Form.Group>
+
+                </Form.Row>
+
+                <Form.Group as={Col}>
+                    <Form.Check type="checkbox" label="Is your party open to Requests?" value={openToRequest} onChange={(event) => setOpenToRequest(!openToRequest)}/>
+                </Form.Group>
+
+                <Form.Group as={Col} className="party-group-box">
+                    <Form.Label>Party Members</Form.Label>
                     <SearchBarComponent />
                     {searchedUsers && Object.values(searchedUsers).map((user) => (
                         <div>
                             <h5 value={user.username} key={user}>{user.username}</h5>
-                            <button key={user.id} onClick={(event) => addMember(event, user.username)}>Add Party Member</button>
+                            <Button className="m-2" variant="dark" key={user.id} onClick={(event) => addMember(event, user.username)}>Add Party Member</Button>
                         </div>
                     ))}
-                <label>Selected Party Members</label>
+                </Form.Group>
+
+                <Form.Group className="party-selected">
+                    <Form.Label>Selected Party Members</Form.Label>
                     <div className="party-members">
                         {partyMembers.length > 0 && partyMembers.map((member) => (
                             <h5 key={member}>{member}</h5>
                         ))}
-                        <button onClick={event => removeMembers(event)}>Discard party</button>
+                        <Button className="m-2" variant="danger" onClick={event => removeMembers(event)}>Discard party</Button>
                     </div>
-                <button>Submit</button>
-            </form>
+                </Form.Group>
+                <Button className="m-2" variant="dark">Submit</Button>
+            </Form>
         </div>
     )
 }

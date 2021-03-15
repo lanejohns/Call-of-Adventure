@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
+import Button from 'react-bootstrap/Button'
 
 import LogoutButton from './auth/LogoutButton';
 import { currentUser } from "../store/auth"
@@ -12,31 +13,49 @@ const NavBar = () => {
 
   const theUser = useSelector(state => state.currentUser)
   const dispatch = useDispatch()
+  const history = useHistory()
 
       useEffect(() => {
         dispatch(currentUser())
     }, [dispatch])
   
+    
+    const partyClick = () => {
+      history.push(`/party/${theUser.party_id}`)
+  }
+
+    const partyCreateClick = () => {
+      history.push("/party/create")
+    }
+  
+  const loginClick = () => {
+    history.push("/login")
+  }
+  
+  const signupClick = () => {
+    history.push("/sign-up")
+  }
+  
   let sessionLinks;
   if (theUser.party_id != null) {
     sessionLinks = (
     <>
-      <Nav.Link href={`/party/${theUser.party_id}`}>Your Party</Nav.Link>
+      {/* <Nav.Link href={`/party/${theUser.party_id}`}>Your Party</Nav.Link> */}
+      <Button className="m-2" variant="outline-light" onClick={partyClick}>Your Party</Button>
     </>
     )
   } else {
     sessionLinks = (
       <>
-        <Nav.Link href="/party/create">Create a Party</Nav.Link>
+        {/* <Nav.Link href="/party/create">Create a Party</Nav.Link> */}
+        <Button className="m-2" variant="outline-light" onClick={partyCreateClick}>Create Party</Button>
       </>
     )
   }
-  
 
-  const partyId = 1
   return (
     <Navbar sticky="top" style={{ height: 90, backgroundColor: "#292F36" }} variant="dark">
-      <Navbar.Brand href="/" >Adventure Maps</Navbar.Brand>
+      <Navbar.Brand href="/" >Call of Adventure</Navbar.Brand>
       {/* <Nav.Link href={`/party/${theUser.party_id}`}>Your Party</Nav.Link>
       <Nav.Link href="/party/create">Create a Party</Nav.Link> */}
       {theUser && sessionLinks}
@@ -45,13 +64,19 @@ const NavBar = () => {
             Home
         </Nav.Link>
           <NavDropdown.Divider />
-          <Nav.Link href="/login" exact={true} activeClassName="active">
+          {/* <Nav.Link href="/login" exact={true} activeClassName="active">
             Login
-          </Nav.Link>
+          </Nav.Link> */}
+          <Button className="m-2" variant="dark" onClick={loginClick}>
+            Login
+          </Button>
           <NavDropdown.Divider />
-          <Nav.Link href="/sign-up" exact={true} activeClassName="active">
+          {/* <Nav.Link href="/sign-up" exact={true} activeClassName="active">
             Sign Up
-          </Nav.Link>
+          </Nav.Link> */}
+          <Button className="m-2" variant="dark" onClick={signupClick}>
+            Sign Up
+          </Button>
           <NavDropdown.Divider />
           <LogoutButton />
       </NavDropdown>

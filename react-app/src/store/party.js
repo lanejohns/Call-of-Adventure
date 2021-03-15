@@ -80,7 +80,7 @@ export const deleteThunk = (id) => async (dispatch) => {
             "Content-Type": "application/json"
         },
     })
-    console.log("DELETETHUNK RESPONSE", response)
+    
     const party = await response.json()
     dispatch(deleteParty(party))
     return party

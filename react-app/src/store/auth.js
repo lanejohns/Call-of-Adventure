@@ -25,7 +25,6 @@ const signUpUser = (user) => {
 }
 
 const signOutUser = (user) => {
-    console.log(user)
     return {
         type: SIGN_OUT,
         payload: user
@@ -35,7 +34,7 @@ const signOutUser = (user) => {
 
 export const currentUser = () => async(dispatch) => {
     const response = await fetch("/api/auth/")
-    console.log(response)
+    
     if (response.ok) {
         const user = await response.json()
         return dispatch(getCurrentUser(user))
@@ -101,7 +100,7 @@ const currentUserReducer = (state = initialState, action) => {
             newState = Object.assign({}, state, { ...action.payload });
             return newState;
         case SIGN_OUT:
-            console.log({ ...action.payload })
+            
             newState = Object.assign({}, state, { ...action.payload });
             return newState;
         case GET_USER:
