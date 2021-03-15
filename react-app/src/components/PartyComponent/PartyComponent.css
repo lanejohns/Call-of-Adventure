@@ -1,0 +1,17 @@
+.party-body {
+    margin: 20px;
+}
+
+.party-name-input {
+    margin-right: 5px;
+}
+
+/* .party-group-box {
+    border: solid black 2px;
+    padding: 5px;
+} */
+
+.party-members {
+    border: solid black 2px;
+    padding: 5px;
+}

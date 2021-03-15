@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 import { useHistory } from "react-router-dom";
+import Button from 'react-bootstrap/Button'
 
 import { WrappedGoogleMap } from "../GoogleMapsComponent"
 import { getParty } from "../../store/party"
@@ -51,13 +52,15 @@ const PartyProfileComponent = () => {
             {party && 
             <div>
                 <h1>{party.party_name}</h1>
-                <h1>Party Members</h1>
-                {members && members.map((member) => (
-                    <h3>{member.username}</h3>
-                ))}
-                <button onClick={handleDelete}>Delete your party</button>
-                <button onClick={handleClick}>Make a session</button>
-                <button onClick={handleSessions}>View your sessions</button>
+                <div className="party-mems">
+                    <h1>Party Members</h1>
+                    {members && members.map((member) => (
+                        <h3>{member.username}</h3>
+                    ))}
+                </div>
+                <Button className="m-2" variant="danger" onClick={handleDelete}>Delete your party</Button>
+                <Button className="m-2" variant="dark" onClick={handleClick}>Make a session</Button>
+                <Button  className="m-2" variant="dark" onClick={handleSessions}>View your sessions</Button>
             </div>
             }
             {createSession === true && 

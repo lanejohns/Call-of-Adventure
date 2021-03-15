@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory, Redirect } from "react-router-dom";
+import Button from 'react-bootstrap/Button'
 
 import { logout } from "../../services/auth";
 import { logoutThunk } from "../../store/auth"
@@ -19,7 +20,7 @@ const LogoutButton = () => {
     window.location.reload(false)
   };
 
-  return <button onClick={onLogout}>Logout</button>;
+  return <Button className="m-2" variant="dark" onClick={onLogout}>Logout</Button>;
 };
 
 export default LogoutButton;
