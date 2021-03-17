@@ -73,7 +73,7 @@ const PartyProfileComponent = () => {
             </div>
             }
             {createPost === true &&
-            <ReactQuillComponent />
+            <ReactQuillComponent partyId={partyId}/>
             }
             {createSession === true && 
             <CreateSessionComponent />

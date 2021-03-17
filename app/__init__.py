@@ -11,6 +11,7 @@ from .api.auth_routes import auth_routes
 from .api.party_routes import party_routes
 from .api.session_routes import session_routes
 from .api.current_user_routes import current_user_routes
+from .api.post_routes import post_routes
 
 from .seeds import seed_commands
 
@@ -37,6 +38,7 @@ app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(party_routes, url_prefix='/api/parties')
 app.register_blueprint(session_routes, url_prefix='/api/sessions')
 app.register_blueprint(current_user_routes, url_prefix='/api/current_user')
+app.register_blueprint(post_routes, url_prefix='/api/posts')
 db.init_app(app)
 Migrate(app, db)
 
