@@ -6,6 +6,7 @@ import { DatePicker, DatePickerCalendar } from 'react-nice-dates'
 import Geocode from "react-geocode";
 
 import { editSession } from "../../store/session"
+import "./EditSessionComponent.css"
 import 'react-nice-dates/build/style.css'
 
 const EditSessionComponent = ({session}) => {

@@ -53,9 +53,9 @@ const PartyProfileComponent = () => {
             <div className="party-profile">
                 <h1 className="party-name">{party.party_name}</h1>
                 <div className="party-mems">
-                    <h1>Party Members</h1>
+                    <h1 className="members-list">Party Members</h1>
                     {members && members.map((member) => (
-                        <h3>{member.username}</h3>
+                        <h3 className="member-name" >{member.username}</h3>
                     ))}
                 </div>
                 <Button size="lg" className="make-session-button m-2" variant="dark" onClick={handleClick}>Make a session</Button>
