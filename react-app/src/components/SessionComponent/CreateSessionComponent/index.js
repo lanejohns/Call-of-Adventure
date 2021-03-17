@@ -132,8 +132,8 @@ const CreateSessionComponent = () => {
     }
 
     return (
-        <div>
-            <h1>This is the Session Creation Component</h1>
+        <div className="create-session-div">
+            <h1 className="session-message">Create Your Session Below</h1>
             <Form.Group className="session-form">
                 <Form onSubmit={handleSubmit}>
                     <Form.Group className="title-Form">
@@ -144,7 +144,9 @@ const CreateSessionComponent = () => {
                         <Form.Label>Description</Form.Label>
                         <Form.Control as="textarea" value={description} onChange={(event) => setDescription(event.target.value)}/>
                     </Form.Group>
-                    <Form.Group className="date-form">
+
+                    <Form.Row>
+                    <Form.Group as={Col} className="date-form">
                         <Form.Label>Choose Date</Form.Label>
                         <DatePicker date={date} onDateChange={setDate} locale={enGB}>
                             {({ inputProps, focused }) => (
@@ -155,30 +157,39 @@ const CreateSessionComponent = () => {
                             )}
                         </DatePicker>
                     </Form.Group>
-                    <Form.Group className="time-form">
-                        <Form.Label>What time will you be gathering?</Form.Label>
+                    <Form.Group as={Col} className="time-form">
+                        <Form.Label>Time of Session?</Form.Label>
                         <Form.Control value={time} onChange={(event) => setTime(event.target.value)} />
                     </Form.Group>
-                    <Form.Group className="address-form">
+                    </Form.Row>
+
+                    <Form.Row>
+                    <Form.Group as={Col} className="address-form">
                         <Form.Label>Address</Form.Label>
                         <Form.Control value={address} onChange={(event) => setAddress(event.target.value)} />
                     </Form.Group>
-                    <Form.Group className="city-form">
+                    <Form.Group as={Col} className="city-form">
                         <Form.Label>City</Form.Label>
                         <Form.Control value={city} onChange={(event) => setCity(event.target.value)}/>
                     </Form.Group>
-                    <Form.Group className="state-form">
+                    </Form.Row>
+
+                    <Form.Row>
+                    <Form.Group as={Col} className="state-form">
                         <Form.Label>State</Form.Label>
+                        <br></br>
                         <select value={state} onChange={(e) => setState(e.target.value)}>
                             {states.map((state) => (
                                 <option key={state}>{state}</option>
                             ))}
                         </select>
                     </Form.Group>
-                    <Form.Group className="zipcode-form">
+                    <Form.Group as={Col} className="zipcode-form">
                         <Form.Label>Zipcode</Form.Label>
                         <Form.Control type="number" value={zipcode} onChange={(event) => setZipcode(event.target.value)}/>
                     </Form.Group>
+                    </Form.Row>
+
                     <Form.Group className="physical-form">
                         <Form.Check type="checkbox" label="Are you playing in person?" value={inPerson} onChange={(event) => setInPerson(!inPerson)}/>
                     </Form.Group>

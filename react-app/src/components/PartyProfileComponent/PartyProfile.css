@@ -9,15 +9,19 @@
 }
 
 .delete-button {
-    width: 30%
+    width: 30%;
+    display: flex;
+
 }
 
 .make-session-button {
     width: 30%;
+    display: flex;
 }
 
 .view-session-button {
     width: 30%;
+    display: flex;
 }
 
 .party-mems {
