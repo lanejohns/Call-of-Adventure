@@ -47,7 +47,7 @@ const PartyComponent = () => {
 
     const removeMembers = (event) => {
         event.preventDefault()
-        setPartyMembers([])
+        setPartyMembers([theUser.username])
     }
 
     useEffect(() => {
