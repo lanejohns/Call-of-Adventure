@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 import { useHistory } from "react-router-dom";
+import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
 import { WrappedGoogleMap } from "../GoogleMapsComponent"
@@ -11,6 +12,7 @@ import { deleteThunk } from "../../store/party"
 import { getMembers } from "../../store/user"
 import CreateSessionComponent from "../SessionComponent/CreateSessionComponent/index"
 import PartySessionsComponent from "../PartySessionsComponent/index"
+import ReactQuillComponent from "../ReactQuillComponent/index"
 import "./PartyProfile.css"
 
 const PartyProfileComponent = () => {
@@ -25,6 +27,7 @@ const PartyProfileComponent = () => {
 
     const [createSession, setCreateSession] = useState(false)
     const [viewSessions, setViewSessions] = useState(false)
+    const [createPost, setCreatePost] = useState(false)
 
     const handleClick = () => {
         setCreateSession(!createSession)
@@ -33,6 +36,10 @@ const PartyProfileComponent = () => {
 
     const handleSessions = () => {
         setViewSessions(!viewSessions)
+    }
+
+    const handlePost = () => {
+        setCreatePost(!createPost)
     }
 
     const handleDelete = () => {
@@ -60,8 +67,13 @@ const PartyProfileComponent = () => {
                 </div>
                 <Button size="lg" className="make-session-button m-2" variant="dark" onClick={handleClick}>Make a session</Button>
                 <Button size="lg" className="view-session-button m-2" variant="dark" onClick={handleSessions}>View your sessions</Button>
+                <Button size="lg" className="view-session-button m-2" variant="dark" onClick={handlePost}>Create a Post</Button>
                 <Button size="lg" className="delete-button m-2" variant="danger" onClick={handleDelete}>Delete your party</Button>
+                <hr className="m-3"></hr>
             </div>
+            }
+            {createPost === true &&
+            <ReactQuillComponent />
             }
             {createSession === true && 
             <CreateSessionComponent />
