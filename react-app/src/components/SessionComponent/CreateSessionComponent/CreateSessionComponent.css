@@ -1,0 +1,38 @@
+.create-session-div {
+    display: flex;
+    flex-direction: column;
+}
+
+.session-message {
+    display: flex;
+    /* align-self: center;/ */
+    border-bottom: solid 0.2rem black;
+    margin-left: 1.5rem;
+    margin-top: 1rem;
+    width: 36%;
+}
+
+.session-form {
+    width: 60%;
+    padding: 2rem;
+}
+
+.date-form {
+    width: 30%;
+}
+
+.time-form {
+    width: 30%;
+}
+
+.address-form {
+    width: 50%;
+}
+
+.city-form {
+    width: 30%;
+}
+
+.zipcode-form {
+    width: 20%;
+}

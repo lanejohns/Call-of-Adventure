@@ -18,8 +18,6 @@ const HomeComponent = () => {
 
     useEffect(() => {
         dispatch(getUsers())
-        // dispatch(getParties())
-        // dispatch(currentUser())
     }, [dispatch])
 
 

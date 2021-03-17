@@ -1,5 +1,43 @@
+.party-profile {
+    display: flex;
+    flex-direction: column;
+}
+
+.party-name {
+    display: flex;
+    align-self: center;
+    border-bottom: solid 0.2rem black;
+}
+
+.members-list {
+    border-bottom: solid 0.2rem black;
+    width: 25%;
+    padding-left: 2rem;
+    margin-left: 1rem;
+}
+
+.member-name {
+    padding-left: 8rem;
+}
+
+.delete-button {
+    width: 30%;
+    display: flex;
+
+}
+
+.make-session-button {
+    width: 30%;
+    display: flex;
+}
+
+.view-session-button {
+    width: 30%;
+    display: flex;
+}
+
 .party-mems {
-    border: solid black 2px;
+    /* border: solid black 2px; */
     /* display: flex; */
     /* justify-content: center; */
 }
