@@ -4,8 +4,12 @@ import { useParams } from "react-router-dom"
 import { enGB } from 'date-fns/locale'
 import { DatePicker, DatePickerCalendar } from 'react-nice-dates'
 import Geocode from "react-geocode";
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
+import Col from 'react-bootstrap/Col'
 
 import { createSession } from "../../../store/session"
+import "./CreateSessionComponent.css"
 import 'react-nice-dates/build/style.css'
 
 const CreateSessionComponent = () => {
@@ -130,58 +134,57 @@ const CreateSessionComponent = () => {
     return (
         <div>
             <h1>This is the Session Creation Component</h1>
-            <div className="session-form">
-                <form onSubmit={handleSubmit}>
-                    <div className="title-form">
-                        <label>Title</label>
-                        <input value={title} onChange={(event) => setTitle(event.target.value)}/>
-                    </div>
-                    <div className="description-form">
-                        <label>Description</label>
-                        <textarea value={description} onChange={(event) => setDescription(event.target.value)}/>
-                    </div>
-                    <div className="date-form">
-                        <label>Choose Date</label>
+            <Form.Group className="session-form">
+                <Form onSubmit={handleSubmit}>
+                    <Form.Group className="title-Form">
+                        <Form.Label>Title</Form.Label>
+                        <Form.Control value={title} onChange={(event) => setTitle(event.target.value)}/>
+                    </Form.Group>
+                    <Form.Group className="description-form">
+                        <Form.Label>Description</Form.Label>
+                        <Form.Control as="textarea" value={description} onChange={(event) => setDescription(event.target.value)}/>
+                    </Form.Group>
+                    <Form.Group className="date-form">
+                        <Form.Label>Choose Date</Form.Label>
                         <DatePicker date={date} onDateChange={setDate} locale={enGB}>
                             {({ inputProps, focused }) => (
-                                <input
+                                <Form.Control
                                     className={'input' + (focused ? ' -focused' : '')}
                                     {...inputProps}
                                 />
                             )}
                         </DatePicker>
-                    </div>
-                    <div className="time-form">
-                        <label>What time will you be gathering?</label>
-                        <input value={time} onChange={(event) => setTime(event.target.value)} />
-                    </div>
-                    <div className="address-form">
-                        <label>Address</label>
-                        <input value={address} onChange={(event) => setAddress(event.target.value)} />
-                    </div>
-                    <div className="city-form">
-                        <label>City</label>
-                        <input value={city} onChange={(event) => setCity(event.target.value)}/>
-                    </div>
-                    <div className="state-form">
-                        <label>State</label>
+                    </Form.Group>
+                    <Form.Group className="time-form">
+                        <Form.Label>What time will you be gathering?</Form.Label>
+                        <Form.Control value={time} onChange={(event) => setTime(event.target.value)} />
+                    </Form.Group>
+                    <Form.Group className="address-form">
+                        <Form.Label>Address</Form.Label>
+                        <Form.Control value={address} onChange={(event) => setAddress(event.target.value)} />
+                    </Form.Group>
+                    <Form.Group className="city-form">
+                        <Form.Label>City</Form.Label>
+                        <Form.Control value={city} onChange={(event) => setCity(event.target.value)}/>
+                    </Form.Group>
+                    <Form.Group className="state-form">
+                        <Form.Label>State</Form.Label>
                         <select value={state} onChange={(e) => setState(e.target.value)}>
                             {states.map((state) => (
                                 <option key={state}>{state}</option>
                             ))}
                         </select>
-                    </div>
-                    <div className="zipcode-form">
-                        <label>Zipcode</label>
-                        <input type="number" value={zipcode} onChange={(event) => setZipcode(event.target.value)}/>
-                    </div>
-                    <div className="physical-form">
-                        <label>Are you playing in person?</label>
-                        <input type="checkbox" value={inPerson} onChange={(event) => setInPerson(!inPerson)}/>
-                    </div>
-                    <button type="submit">Submit</button>
-                </form>
-            </div>
+                    </Form.Group>
+                    <Form.Group className="zipcode-form">
+                        <Form.Label>Zipcode</Form.Label>
+                        <Form.Control type="number" value={zipcode} onChange={(event) => setZipcode(event.target.value)}/>
+                    </Form.Group>
+                    <Form.Group className="physical-form">
+                        <Form.Check type="checkbox" label="Are you playing in person?" value={inPerson} onChange={(event) => setInPerson(!inPerson)}/>
+                    </Form.Group>
+                    <Button className="m-2" variant="dark" type="submit">Submit</Button>
+                </Form>
+            </Form.Group>
         </div>
     )
 }

@@ -50,17 +50,17 @@ const PartyProfileComponent = () => {
     return (
         <div>
             {party && 
-            <div>
-                <h1>{party.party_name}</h1>
+            <div className="party-profile">
+                <h1 className="party-name">{party.party_name}</h1>
                 <div className="party-mems">
                     <h1>Party Members</h1>
                     {members && members.map((member) => (
                         <h3>{member.username}</h3>
                     ))}
                 </div>
-                <Button className="m-2" variant="danger" onClick={handleDelete}>Delete your party</Button>
-                <Button className="m-2" variant="dark" onClick={handleClick}>Make a session</Button>
-                <Button  className="m-2" variant="dark" onClick={handleSessions}>View your sessions</Button>
+                <Button className="delete-button m-2" variant="danger" onClick={handleDelete}>Delete your party</Button>
+                <Button className="make-session-button m-2" variant="dark" onClick={handleClick}>Make a session</Button>
+                <Button  className="view-session-button m-2" variant="dark" onClick={handleSessions}>View your sessions</Button>
             </div>
             }
             {createSession === true && 
