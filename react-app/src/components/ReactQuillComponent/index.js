@@ -28,6 +28,7 @@ const ReactQuillComponent = ({partyId}) => {
         }
         console.log("PAYLOAD", payload)
         dispatch(postThunk(payload))
+        setContent("")
     }
 
     return (

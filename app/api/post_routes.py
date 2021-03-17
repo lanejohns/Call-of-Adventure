@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import current_user
 from app.models import db, Post
-from app.forms.post_form import PostForm
+from app.forms import PostForm
 
 post_routes = Blueprint("posts", __name__)
 
@@ -16,19 +16,19 @@ def add_post(id):
     print("THIS IS THE POST FORM ROUTE")
     form = PostForm()
     # form = "hello!"
-    print("THIS IS THE POST FORM", form)
+    print("THIS IS THE POST FORM", request.data)
     form['csrf_token'].data = request.cookies['csrf_token']
-    if form.validate_on_submit():
-        post = Post(
-            party_id=id,
-            user_id=current_user.id,
-            body=form.data["body"]
-        )
-        print("THIS IS THE POST ITSELF ----------->", post)
-        db.session.add(post)
-        db.session.commit()
-        return {"post": post.to_dict()}
-    return {"errors": "set errors here"}
+    # if form.validate_on_submit():
+    post = Post(
+        body=form.data["body"],
+        party_id=id,
+        user_id=current_user.id
+    )
+    print("THIS IS THE POST ITSELF ----------->", post)
+    db.session.add(post)
+    db.session.commit()
+    return {"post": post.to_dict()}
+    # return {"errors": "set errors here"}
 
 
 @post_routes.route("/<id>", methods=["DELETE"])
