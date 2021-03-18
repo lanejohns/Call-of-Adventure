@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Jumbotron from 'react-bootstrap/Jumbotron'
 import Container from 'react-bootstrap/Jumbotron'
 
+import "./HomePageComponent.css"
 import { WrappedGoogleMap } from "../GoogleMapsComponent"
 import { HomeWrappedGoogleMap } from "../HomeGoogleComponent"
 import { getUsers } from "../../store/user"
@@ -24,8 +25,8 @@ const HomeComponent = () => {
     const apiKey = process.env.REACT_APP_GOOGLE_KEY
     return (
         <div>
-            <Jumbotron fluid>
-                <Container>
+            <Jumbotron className="jumbotron-body" fluid>
+                <Container className="container-body">
                     <h1>Call of Adventure</h1>
                     {theUser.id && 
                     <p>Welcome {theUser.username}!</p>

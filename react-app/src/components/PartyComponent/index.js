@@ -56,8 +56,8 @@ const PartyComponent = () => {
 
     return (
         <div className="party-body">
-            <Form onSubmit={handleSubmit} className="text-center container">
-                <Form.Row className="align-items-center">
+            <Form onSubmit={handleSubmit}>
+                <Form.Row >
                 <Form.Group className="party-name-input">
                     <Form.Label >Party Name</Form.Label>
                     <Form.Control value={partyName} onChange={(event) => setPartyName(event.target.value)} placeholder="Party Name"/>
@@ -75,7 +75,7 @@ const PartyComponent = () => {
                 </Form.Group>
 
                 <Form.Group as={Col} className="party-group-box">
-                    <Form.Label>Party Members</Form.Label>
+                    {/* <Form.Label>Party Members</Form.Label> */}
                     <SearchBarComponent />
                     {searchedUsers && Object.values(searchedUsers).map((user) => (
                         <div>

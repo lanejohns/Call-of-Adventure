@@ -58,7 +58,7 @@ const NavBar = () => {
       <Navbar.Brand href="/" >Call of Adventure</Navbar.Brand>
       {/* <Nav.Link href={`/party/${theUser.party_id}`}>Your Party</Nav.Link>
       <Nav.Link href="/party/create">Create a Party</Nav.Link> */}
-      {theUser && sessionLinks}
+      {theUser.id && sessionLinks}
       <NavDropdown title="Dropdown" id="basic-nav-dropdown">
         <Nav.Link href="/" exact={true} activeClassName="active">
             Home
