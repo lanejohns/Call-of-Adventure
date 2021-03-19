@@ -31,6 +31,10 @@ const NavBar = () => {
   const loginClick = () => {
     history.push("/login")
   }
+
+  const homeClick = () => {
+    history.push("/")
+  }
   
   const signupClick = () => {
     history.push("/sign-up")
@@ -60,9 +64,9 @@ const NavBar = () => {
       <Nav.Link href="/party/create">Create a Party</Nav.Link> */}
       {theUser.id && sessionLinks}
       <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-        <Nav.Link href="/" exact={true} activeClassName="active">
+        <Button className="m-2" variant="dark" onClick={homeClick}>
             Home
-        </Nav.Link>
+        </Button>
           <NavDropdown.Divider />
           {/* <Nav.Link href="/login" exact={true} activeClassName="active">
             Login

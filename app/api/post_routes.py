@@ -5,11 +5,16 @@ from app.forms import PostForm
 
 post_routes = Blueprint("posts", __name__)
 
-@post_routes.route("/<id>")
-def all_posts(id):
-    posts = Post.query.filter(Post.party_id == id)
-    return {"all_posts": {post.id: post.to_dict() for post in posts}}
+# @post_routes.route("/<id>")
+# def all_posts(id):
+#     posts = Post.query.filter(Post.party_id == id)
+#     return {"all_posts": {post.id: post.to_dict() for post in posts}}
 
+
+@post_routes.route("/<id>")
+def party_posts(id):
+    posts = Post.query.filter(Post.party_id == id).all()
+    return {"all_posts": {post.id: post.to_dict() for post in posts}}
 
 @post_routes.route("/<id>", methods=["POST"])
 def add_post(id):

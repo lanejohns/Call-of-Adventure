@@ -4,12 +4,14 @@ import { useParams } from "react-router-dom"
 import { useHistory } from "react-router-dom";
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import parser from 'react-html-parser'
 
 import { WrappedGoogleMap } from "../GoogleMapsComponent"
 import { getParty } from "../../store/party"
 import { getSessions, deleteSession } from "../../store/session"
 import { deleteThunk } from "../../store/party"
 import { getMembers } from "../../store/user"
+import { getPosts } from "../../store/post"
 import CreateSessionComponent from "../SessionComponent/CreateSessionComponent/index"
 import PartySessionsComponent from "../PartySessionsComponent/index"
 import ReactQuillComponent from "../ReactQuillComponent/index"
@@ -21,6 +23,7 @@ const PartyProfileComponent = () => {
     const party = useSelector(state => state.parties.party)
     const sessions = useSelector(state => state.sessions.all_sessions)
     const members = useSelector(state => state.users.members)
+    const posts = useSelector(state => state.posts.all_posts)
     const partyId = Number.parseInt(useParams().partyId)
     const history = useHistory()
     const apiKey = process.env.REACT_APP_GOOGLE_KEY
@@ -52,6 +55,7 @@ const PartyProfileComponent = () => {
         dispatch(getParty(partyId))
         dispatch(getSessions(partyId))
         dispatch(getMembers(partyId))
+        dispatch(getPosts(partyId))
     }, [dispatch])
 
     return (
@@ -61,9 +65,17 @@ const PartyProfileComponent = () => {
                 <h1 className="party-name">{party.party_name}</h1>
                 <div className="party-mems">
                     <h1 className="members-list">Party Members</h1>
+                    <h1 className="posts-title">Posts</h1>
                     {members && members.map((member) => (
-                        <h3 className="member-name" >{member.username}</h3>
+                        <h3 key={member.id} className="member-name" >{member.username}</h3>
                     ))}
+                </div>
+                <div className="posts-body">
+                    {posts && 
+                    Object.values(posts).map((post) => (
+                        <div className="each-post">{parser(post.body)}</div>
+                    ))
+                    }
                 </div>
                 <Button size="lg" className="make-session-button m-2" variant="dark" onClick={handleClick}>Make a session</Button>
                 <Button size="lg" className="view-session-button m-2" variant="dark" onClick={handleSessions}>View your sessions</Button>

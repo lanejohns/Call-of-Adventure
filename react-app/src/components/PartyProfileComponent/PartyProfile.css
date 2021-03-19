@@ -20,6 +20,21 @@
     padding-left: 7rem;
 }
 
+.posts-body {
+    display: flex;
+    flex-direction: column;
+    border: solid red 1px;
+    /* align-items: flex-start; */
+}
+
+.each-post {
+    display: flex;
+    border: solid black 1px;
+    /* justify-self: right; */
+    align-self: flex-end;
+    padding-right: 20rem;
+}
+
 .delete-button {
     width: 30%;
     display: flex;
