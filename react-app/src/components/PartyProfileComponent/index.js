@@ -45,8 +45,8 @@ const PartyProfileComponent = () => {
         setCreatePost(!createPost)
     }
 
-    const handleDelete = () => {
-        dispatch(deleteThunk(partyId))
+    const handleDelete = async () => {
+        await dispatch(deleteThunk(partyId))
         history.push("/")
     }
 
