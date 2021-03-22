@@ -3,6 +3,15 @@
     flex-direction: column;
 }
 
+.party-div {
+    display: flex;
+    flex-direction: row;
+}
+
+.party-content-left {
+    width: 50%;
+}
+
 .party-name {
     display: flex;
     align-self: center;
@@ -17,7 +26,31 @@
 }
 
 .member-name {
-    padding-left: 8rem;
+    padding-left: 7rem;
+}
+
+.posts-div {
+    height: 300px;
+    /* overflow-y: scroll; */
+}
+
+.posts-wrapper {
+    overflow-y: scroll;
+    height: 80%;
+}
+
+.posts-body {
+    display: flex;
+    flex-direction: column;
+    border: solid red 1px;
+    height: 6000px;
+    min-height: 200px;
+}
+
+.each-post {
+    display: flex;
+    border: solid black 1px;
+    align-self: flex-start;
 }
 
 .delete-button {
@@ -37,7 +70,5 @@
 }
 
 .party-mems {
-    /* border: solid black 2px; */
-    /* display: flex; */
-    /* justify-content: center; */
+    /* width: 50%; */
 }

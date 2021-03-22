@@ -2,15 +2,19 @@ import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 import { useHistory } from "react-router-dom";
+import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import parser from 'react-html-parser'
 
 import { WrappedGoogleMap } from "../GoogleMapsComponent"
 import { getParty } from "../../store/party"
 import { getSessions, deleteSession } from "../../store/session"
 import { deleteThunk } from "../../store/party"
 import { getMembers } from "../../store/user"
+import { getPosts } from "../../store/post"
 import CreateSessionComponent from "../SessionComponent/CreateSessionComponent/index"
 import PartySessionsComponent from "../PartySessionsComponent/index"
+import ReactQuillComponent from "../ReactQuillComponent/index"
 import "./PartyProfile.css"
 
 const PartyProfileComponent = () => {
@@ -19,12 +23,14 @@ const PartyProfileComponent = () => {
     const party = useSelector(state => state.parties.party)
     const sessions = useSelector(state => state.sessions.all_sessions)
     const members = useSelector(state => state.users.members)
+    const posts = useSelector(state => state.posts.all_posts)
     const partyId = Number.parseInt(useParams().partyId)
     const history = useHistory()
     const apiKey = process.env.REACT_APP_GOOGLE_KEY
 
     const [createSession, setCreateSession] = useState(false)
     const [viewSessions, setViewSessions] = useState(false)
+    const [createPost, setCreatePost] = useState(false)
 
     const handleClick = () => {
         setCreateSession(!createSession)
@@ -35,8 +41,12 @@ const PartyProfileComponent = () => {
         setViewSessions(!viewSessions)
     }
 
-    const handleDelete = () => {
-        dispatch(deleteThunk(partyId))
+    const handlePost = () => {
+        setCreatePost(!createPost)
+    }
+
+    const handleDelete = async () => {
+        await dispatch(deleteThunk(partyId))
         history.push("/")
     }
 
@@ -45,23 +55,48 @@ const PartyProfileComponent = () => {
         dispatch(getParty(partyId))
         dispatch(getSessions(partyId))
         dispatch(getMembers(partyId))
+        dispatch(getPosts(partyId))
     }, [dispatch])
 
     return (
         <div>
             {party && 
             <div className="party-profile">
-                <h1 className="party-name">{party.party_name}</h1>
-                <div className="party-mems">
-                    <h1 className="members-list">Party Members</h1>
-                    {members && members.map((member) => (
-                        <h3 className="member-name" >{member.username}</h3>
-                    ))}
+                    <h1 className="party-name">{party.party_name}</h1>
+                <div className="party-div">
+                    <div className="party-content-left">
+                        
+                        <div className="party-mems">
+                            <h1 className="members-list">Party Members</h1>
+                            {members && members.map((member) => (
+                                <h3 key={member.id} className="member-name" >{member.username}</h3>
+                            ))}
+                        </div>
+                    </div>
+                    <div className="posts-div">
+                        <h1 className="posts-title">Posts</h1>
+                        <div className="posts-wrapper">
+                            <div className="posts-body">
+                                {posts && 
+                                Object.values(posts).map((post) => (
+                                    <div className="each-post">{parser(post.body)}</div>
+                                ))
+                                }
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
+                <hr className="m-3"></hr>
                 <Button size="lg" className="make-session-button m-2" variant="dark" onClick={handleClick}>Make a session</Button>
                 <Button size="lg" className="view-session-button m-2" variant="dark" onClick={handleSessions}>View your sessions</Button>
+                <Button size="lg" className="view-session-button m-2" variant="dark" onClick={handlePost}>Create a Post</Button>
                 <Button size="lg" className="delete-button m-2" variant="danger" onClick={handleDelete}>Delete your party</Button>
+                <hr className="m-3"></hr>
             </div>
+            }
+            {createPost === true &&
+            <ReactQuillComponent partyId={partyId}/>
             }
             {createSession === true && 
             <CreateSessionComponent />

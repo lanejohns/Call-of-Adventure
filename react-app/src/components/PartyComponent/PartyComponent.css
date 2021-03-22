@@ -1,17 +1,30 @@
+body {
+    background-image: linear-gradient(to right, rgba(255, 0, 0, 0), #1D84B5);
+}
+
 .party-body {
     margin: 20px;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
 }
 
 .party-name-input {
     margin-right: 5px;
+    display: flex;
+    /* border: solid black 1px; */
+    flex-direction: column;
 }
 
-/* .party-group-box {
+.party-group-box {
     border: solid black 2px;
-    padding: 5px;
-} */
+    border-radius: 25px;
+    padding: 20px;
+}
 
 .party-members {
     border: solid black 2px;
-    padding: 5px;
+    border-radius: 25px;
+    padding: 20px;
 }

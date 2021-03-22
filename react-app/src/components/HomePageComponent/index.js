@@ -1,8 +1,11 @@
 import React, { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux";
+import { NavLink, useHistory } from 'react-router-dom';
 import Jumbotron from 'react-bootstrap/Jumbotron'
 import Container from 'react-bootstrap/Jumbotron'
+import Button from 'react-bootstrap/Button'
 
+import "./HomePageComponent.css"
 import { WrappedGoogleMap } from "../GoogleMapsComponent"
 import { HomeWrappedGoogleMap } from "../HomeGoogleComponent"
 import { getUsers } from "../../store/user"
@@ -15,33 +18,56 @@ const HomeComponent = () => {
     const allUsers = useSelector((state) => state.users.users);
     const allParties = useSelector(state => state.parties.all_parties)
     const theUser = useSelector((state) => state.currentUser)
+    const history = useHistory()
 
     useEffect(() => {
         dispatch(getUsers())
     }, [dispatch])
 
+    const partyClick = () => {
+      history.push(`/party/${theUser.party_id}`)
+    }
+
+    const partyCreateClick = () => {
+      history.push("/party/create")
+    }
+
+    let sessionLinks;
+    if (theUser.party_id != null) {
+        sessionLinks = (
+        <>
+        {/* <Nav.Link href={`/party/${theUser.party_id}`}>Your Party</Nav.Link> */}
+        <Button className="m-2" size="lg" variant="dark" onClick={partyClick}>Your Party</Button>
+        </>
+        )
+    } else {
+        sessionLinks = (
+        <>
+            {/* <Nav.Link href="/party/create">Create a Party</Nav.Link> */}
+            <Button className="m-2" size="lg" variant="dark" onClick={partyCreateClick}>Create Party</Button>
+        </>
+        )
+    }
+
 
     const apiKey = process.env.REACT_APP_GOOGLE_KEY
     return (
         <div>
-            <Jumbotron fluid>
-                <Container>
+            <Jumbotron className="jumbotron-body" fluid>
+                <Container className="container-body">
                     <h1>Call of Adventure</h1>
                     {theUser.id && 
-                    <p>Welcome {theUser.username}!</p>
+                    <h2>Welcome {theUser.username}!</h2>
                     }
-                    <p>
+                    <h4>
                         Check out the map below and get your tabletop games rolling!
-                    </p>
-                    <div>
+                    </h4>
+                    {/* <div>
                         {allUsers && 
                         <h4>There are {Object.keys(allUsers).length} other users in your area.</h4>}
-                    </div>
-                    <div>
-                        {allParties && 
-                        <h4>There are {Object.keys(allParties).length} parties in your area.</h4>}
-                    </div>
-                    
+                    </div> */}
+                    <hr className="m-3"></hr>
+                    {theUser.id && sessionLinks}
                     
                 </Container>
             </Jumbotron>

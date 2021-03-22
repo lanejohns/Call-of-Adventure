@@ -47,7 +47,7 @@ const PartyComponent = () => {
 
     const removeMembers = (event) => {
         event.preventDefault()
-        setPartyMembers([])
+        setPartyMembers([theUser.username])
     }
 
     useEffect(() => {
@@ -56,8 +56,8 @@ const PartyComponent = () => {
 
     return (
         <div className="party-body">
-            <Form onSubmit={handleSubmit} className="text-center container">
-                <Form.Row className="align-items-center">
+            <Form onSubmit={handleSubmit}>
+                <Form.Row >
                 <Form.Group className="party-name-input">
                     <Form.Label >Party Name</Form.Label>
                     <Form.Control value={partyName} onChange={(event) => setPartyName(event.target.value)} placeholder="Party Name"/>
@@ -75,7 +75,7 @@ const PartyComponent = () => {
                 </Form.Group>
 
                 <Form.Group as={Col} className="party-group-box">
-                    <Form.Label>Party Members</Form.Label>
+                    {/* <Form.Label>Party Members</Form.Label> */}
                     <SearchBarComponent />
                     {searchedUsers && Object.values(searchedUsers).map((user) => (
                         <div>
@@ -94,7 +94,7 @@ const PartyComponent = () => {
                         <Button className="m-2" variant="danger" onClick={event => removeMembers(event)}>Discard party</Button>
                     </div>
                 </Form.Group>
-                <Button className="m-2" variant="dark" onClick={handleSubmit}>Submit</Button>
+                <Button className="m-2" variant="dark" size="lg" onClick={handleSubmit} block>Submit</Button>
             </Form>
         </div>
     )

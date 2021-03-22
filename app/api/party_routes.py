@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import current_user, login_required
-from app.models import db, Party, User, Session
+from app.models import db, Party, User, Session, Post
 from app.forms import PartyForm
 
 party_routes = Blueprint('parties', __name__)
@@ -40,11 +40,15 @@ def create_party():
 @party_routes.route('/<id>', methods=['DELETE'])
 def delete_party(id):
     sessions = Session.query.filter(Session.party_id == id).all()
+    posts = Post.query.filter(Post.party_id == id).all()
+    print("THIS IS ALL OF THE PARTIES POSTS =====>>>>>>>>>>>>>>>",posts)
     print("ALL OF THE PARTIES SESSIONS",sessions)
     party = Party.query.filter(Party.id == id).first()
     print("THIS IS THE PARTY ON THE API ROUTE", party)
     for session in sessions:
         db.session.delete(session)
+    for post in posts:
+        db.session.delete(post)
     db.session.delete(party)
     db.session.commit()
     return {'party': party.to_dict()}

@@ -5,12 +5,14 @@ import partyReducer from "./party"
 import userReducer from "./user";
 import sessionReducer from "./session"
 import currentUserReducer from "./auth"
+import postReducer from "./post"
 
 const rootReducer = combineReducers({
   parties: partyReducer,
   users: userReducer,
   sessions: sessionReducer,
-  currentUser: currentUserReducer
+  currentUser: currentUserReducer,
+  posts: postReducer
 })
 
 let enhancer;
