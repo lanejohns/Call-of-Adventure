@@ -62,21 +62,32 @@ const PartyProfileComponent = () => {
         <div>
             {party && 
             <div className="party-profile">
-                <h1 className="party-name">{party.party_name}</h1>
-                <div className="party-mems">
-                    <h1 className="members-list">Party Members</h1>
-                    <h1 className="posts-title">Posts</h1>
-                    {members && members.map((member) => (
-                        <h3 key={member.id} className="member-name" >{member.username}</h3>
-                    ))}
+                    <h1 className="party-name">{party.party_name}</h1>
+                <div className="party-div">
+                    <div className="party-content-left">
+                        
+                        <div className="party-mems">
+                            <h1 className="members-list">Party Members</h1>
+                            {members && members.map((member) => (
+                                <h3 key={member.id} className="member-name" >{member.username}</h3>
+                            ))}
+                        </div>
+                    </div>
+                    <div className="posts-div">
+                        <h1 className="posts-title">Posts</h1>
+                        <div className="posts-wrapper">
+                            <div className="posts-body">
+                                {posts && 
+                                Object.values(posts).map((post) => (
+                                    <div className="each-post">{parser(post.body)}</div>
+                                ))
+                                }
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-                <div className="posts-body">
-                    {posts && 
-                    Object.values(posts).map((post) => (
-                        <div className="each-post">{parser(post.body)}</div>
-                    ))
-                    }
-                </div>
+                <hr className="m-3"></hr>
                 <Button size="lg" className="make-session-button m-2" variant="dark" onClick={handleClick}>Make a session</Button>
                 <Button size="lg" className="view-session-button m-2" variant="dark" onClick={handleSessions}>View your sessions</Button>
                 <Button size="lg" className="view-session-button m-2" variant="dark" onClick={handlePost}>Create a Post</Button>

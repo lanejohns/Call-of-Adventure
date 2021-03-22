@@ -94,7 +94,7 @@ const PartyComponent = () => {
                         <Button className="m-2" variant="danger" onClick={event => removeMembers(event)}>Discard party</Button>
                     </div>
                 </Form.Group>
-                <Button className="m-2" variant="dark" onClick={handleSubmit}>Submit</Button>
+                <Button className="m-2" variant="dark" size="lg" onClick={handleSubmit} block>Submit</Button>
             </Form>
         </div>
     )
