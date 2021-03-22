@@ -67,7 +67,7 @@ const PartyProfileComponent = () => {
                     <div className="party-content-left">
                         
                         <div className="party-mems">
-                            <h1 className="members-list">Party Members</h1>
+                            <h1 className="members-list">Members</h1>
                             {members && members.map((member) => (
                                 <h3 key={member.id} className="member-name" >{member.username}</h3>
                             ))}

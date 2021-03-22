@@ -134,7 +134,8 @@ const EditSessionComponent = ({session}) => {
 
     return (
         <div>
-            <h1>This is the Session Creation Component</h1>
+            <hr className="m-3"></hr>
+            <h1>Edit your session here</h1>
             <Form.Group className="session-form">
                 <Form onSubmit={handleSubmit}>
                     <Form.Group className="title-Form">

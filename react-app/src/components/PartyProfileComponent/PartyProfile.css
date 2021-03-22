@@ -20,7 +20,7 @@
 
 .members-list {
     border-bottom: solid 0.2rem black;
-    width: 25%;
+    /* width: 25%; */
     padding-left: 2rem;
     margin-left: 1rem;
 }
@@ -31,6 +31,7 @@
 
 .posts-div {
     height: 300px;
+    border-bottom: solid 0.2rem black;
     /* overflow-y: scroll; */
 }
 
@@ -42,15 +43,16 @@
 .posts-body {
     display: flex;
     flex-direction: column;
-    border: solid red 1px;
+    border: solid black 0.2rem;
     height: 6000px;
     min-height: 200px;
 }
 
 .each-post {
     display: flex;
-    border: solid black 1px;
+    border-bottom: solid black 1px;
     align-self: flex-start;
+    padding: .5rem;
 }
 
 .delete-button {
@@ -69,6 +71,6 @@
     display: flex;
 }
 
-.party-mems {
-    /* width: 50%; */
+.posts-title {
+    border-bottom: solid 0.2rem black;
 }
