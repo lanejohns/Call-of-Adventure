@@ -7,6 +7,7 @@ import Col from 'react-bootstrap/Col'
 
 import { getUsers } from "../../store/user"
 import { createParty } from "../../store/party"
+import { currentUser } from "../../store/auth"
 import SearchBarComponent from "../SearchBarComponent/index"
 import SearchResultComponent from "../SearchResultComponent/index"
 import "./PartyComponent.css"
@@ -23,7 +24,7 @@ const PartyComponent = () => {
 
     const [partyName, setPartyName] = useState("")
     const [partySize, setPartySize] = useState(4)
-    const [openToRequest, setOpenToRequest] = useState(false)
+    const [openToRequest, setOpenToRequest] = useState(true)
     const [selected, setSelected] = useState("")
     const [partyMembers, setPartyMembers] = useState([theUser.username])
 
@@ -35,7 +36,8 @@ const PartyComponent = () => {
             open_to_request: openToRequest,
             partyMembers
         }
-        await dispatch(createParty(newParty))
+        console.log("THIS SHOULD BE OUR NEW PARTY ===>",newParty)
+        dispatch(createParty(newParty))
         history.push("/")
     }
 
@@ -52,6 +54,7 @@ const PartyComponent = () => {
 
     useEffect(() => {
         dispatch(getUsers())
+        dispatch(currentUser())
         setPartyMembers([...partyMembers, selected])
     }, [dispatch, selected])
 
@@ -72,9 +75,9 @@ const PartyComponent = () => {
 
                 </Form.Row>
 
-                <Form.Group as={Col}>
+                {/* <Form.Group as={Col}>
                     <Form.Check type="checkbox" label="Is your party open to Requests?" value={openToRequest} onChange={(event) => setOpenToRequest(!openToRequest)}/>
-                </Form.Group>
+                </Form.Group> */}
 
                 <Form.Group as={Col} className="party-group-box">
                     {/* <Form.Label>Party Members</Form.Label> */}

@@ -22,6 +22,7 @@ const HomeComponent = () => {
 
     useEffect(() => {
         dispatch(getUsers())
+        dispatch(currentUser())
     }, [dispatch])
 
     const partyClick = () => {
