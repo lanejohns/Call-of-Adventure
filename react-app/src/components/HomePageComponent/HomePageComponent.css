@@ -1,7 +1,24 @@
-.container-body {
-    background-image: linear-gradient(to right, rgba(255, 0, 0, 0), #1D84B5);
-}
-
 .jumbotron-body {
     background-image: linear-gradient(to right, rgba(255, 0, 0, 0), #1D84B5);
+    display: flex;
+}
+
+.container-body {
+    background-image: linear-gradient(to right, rgba(255, 0, 0, 0), #1D84B5);
+    display: flex;
+    flex-direction: row;
+}
+
+.d-20 {
+    content: url(https://i.imgur.com/YGM68QC.gif);
+    display: flex;
+    flex-direction: row;
+    align-self: flex-end;
+    width: 30%;
+}
+
+.text-body {
+    display: flex;
+    flex-direction: column;
+    padding: .3rem
 }

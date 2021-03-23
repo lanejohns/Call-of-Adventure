@@ -12,6 +12,7 @@ import { getSessions, deleteSession } from "../../store/session"
 import { deleteThunk } from "../../store/party"
 import { getMembers } from "../../store/user"
 import { getPosts } from "../../store/post"
+import { currentUser } from "../../store/auth"
 import CreateSessionComponent from "../SessionComponent/CreateSessionComponent/index"
 import PartySessionsComponent from "../PartySessionsComponent/index"
 import ReactQuillComponent from "../ReactQuillComponent/index"
@@ -24,6 +25,7 @@ const PartyProfileComponent = () => {
     const sessions = useSelector(state => state.sessions.all_sessions)
     const members = useSelector(state => state.users.members)
     const posts = useSelector(state => state.posts.all_posts)
+    const theUser = useSelector((state) => state.currentUser)
     const partyId = Number.parseInt(useParams().partyId)
     const history = useHistory()
     const apiKey = process.env.REACT_APP_GOOGLE_KEY
@@ -56,6 +58,7 @@ const PartyProfileComponent = () => {
         dispatch(getSessions(partyId))
         dispatch(getMembers(partyId))
         dispatch(getPosts(partyId))
+        dispatch(currentUser())
     }, [dispatch])
 
     return (

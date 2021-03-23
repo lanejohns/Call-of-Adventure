@@ -7,15 +7,14 @@ import Col from 'react-bootstrap/Col'
 
 import { getUsers } from "../../store/user"
 import { createParty } from "../../store/party"
+import { currentUser } from "../../store/auth"
 import SearchBarComponent from "../SearchBarComponent/index"
-import SearchResultComponent from "../SearchResultComponent/index"
 import "./PartyComponent.css"
 
 const PartyComponent = () => {
     const dispatch = useDispatch()
     const history = useHistory()
 
-    // const allUsers = useSelector((state) => state.users.users);
     const theUser = useSelector((state) => state.currentUser)
     let searchedUsers = useSelector((state) => state.users.searched_users)
 
@@ -23,7 +22,7 @@ const PartyComponent = () => {
 
     const [partyName, setPartyName] = useState("")
     const [partySize, setPartySize] = useState(4)
-    const [openToRequest, setOpenToRequest] = useState(false)
+    const [openToRequest, setOpenToRequest] = useState(true)
     const [selected, setSelected] = useState("")
     const [partyMembers, setPartyMembers] = useState([theUser.username])
 
@@ -35,14 +34,16 @@ const PartyComponent = () => {
             open_to_request: openToRequest,
             partyMembers
         }
+        console.log("THIS SHOULD BE OUR NEW PARTY ===>",newParty)
         await dispatch(createParty(newParty))
+        await dispatch(currentUser())
         history.push("/")
     }
 
     const addMember = (event, username) => {
         event.preventDefault()
         setSelected(username)
-        setPartyMembers([...partyMembers, selected])
+        // setPartyMembers([...partyMembers, selected])
     }
 
     const removeMembers = (event) => {
@@ -52,7 +53,10 @@ const PartyComponent = () => {
 
     useEffect(() => {
         dispatch(getUsers())
-    }, [dispatch])
+        dispatch(currentUser())
+        setPartyMembers([...partyMembers, selected])
+    }, [dispatch, selected])
+
 
     return (
         <div className="party-body">
@@ -70,9 +74,9 @@ const PartyComponent = () => {
 
                 </Form.Row>
 
-                <Form.Group as={Col}>
+                {/* <Form.Group as={Col}>
                     <Form.Check type="checkbox" label="Is your party open to Requests?" value={openToRequest} onChange={(event) => setOpenToRequest(!openToRequest)}/>
-                </Form.Group>
+                </Form.Group> */}
 
                 <Form.Group as={Col} className="party-group-box">
                     {/* <Form.Label>Party Members</Form.Label> */}
