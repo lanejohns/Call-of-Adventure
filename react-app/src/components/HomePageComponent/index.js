@@ -52,22 +52,25 @@ const HomeComponent = () => {
 
     const apiKey = process.env.REACT_APP_GOOGLE_KEY
     return (
-        <div>
+        <div home-page>
             <Jumbotron className="jumbotron-body" fluid>
                 <Container className="container-body">
-                    <h1>Call of Adventure</h1>
-                    {theUser.id && 
-                    <h2>Welcome {theUser.username}!</h2>
-                    }
-                    <h4>
-                        Check out the map below and get your tabletop games rolling!
-                    </h4>
-                    {/* <div>
-                        {allUsers && 
-                        <h4>There are {Object.keys(allUsers).length} other users in your area.</h4>}
-                    </div> */}
-                    <hr className="m-3"></hr>
-                    {theUser.id && sessionLinks}
+                    <div className="d-20 image"></div>
+                    <div className="text-body">
+                        <h1>Call of Adventure</h1>
+                        {theUser.id && 
+                        <h2>Welcome {theUser.username}!</h2>
+                        }
+                        <h4>
+                            Check out the map below and get your tabletop games rolling!
+                        </h4>
+                        {/* <div>
+                            {allUsers && 
+                            <h4>There are {Object.keys(allUsers).length} other users in your area.</h4>}
+                        </div> */}
+                        <hr className="m-3"></hr>
+                        {theUser.id && sessionLinks}
+                    </div>
                     
                 </Container>
             </Jumbotron>

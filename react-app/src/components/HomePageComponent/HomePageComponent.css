@@ -1,7 +1,28 @@
-.container-body {
-    background-image: linear-gradient(to right, rgba(255, 0, 0, 0), #1D84B5);
-}
-
 .jumbotron-body {
     background-image: linear-gradient(to right, rgba(255, 0, 0, 0), #1D84B5);
+    /* border: black .5rem solid; */
+    display: flex;
+}
+
+.container-body {
+    background-image: linear-gradient(to right, rgba(255, 0, 0, 0), #1D84B5);
+    /* border: black .5rem solid; */
+    display: flex;
+    flex-direction: row;
+}
+
+.d-20 {
+    content: url(https://i.imgur.com/YGM68QC.gif);
+    display: flex;
+    flex-direction: row;
+    align-self: flex-end;
+    /* border:black .5rem solid; */
+    width: 30%;
+}
+
+.text-body {
+    display: flex;
+    flex-direction: column;
+    /* border: black .5rem solid; */
+    padding: .3rem
 }

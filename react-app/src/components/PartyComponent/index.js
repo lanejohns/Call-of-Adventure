@@ -42,7 +42,7 @@ const PartyComponent = () => {
     const addMember = (event, username) => {
         event.preventDefault()
         setSelected(username)
-        setPartyMembers([...partyMembers, selected])
+        // setPartyMembers([...partyMembers, selected])
     }
 
     const removeMembers = (event) => {
@@ -52,7 +52,9 @@ const PartyComponent = () => {
 
     useEffect(() => {
         dispatch(getUsers())
-    }, [dispatch])
+        setPartyMembers([...partyMembers, selected])
+    }, [dispatch, selected])
+
 
     return (
         <div className="party-body">
