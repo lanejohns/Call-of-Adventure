@@ -9,14 +9,12 @@ import { getUsers } from "../../store/user"
 import { createParty } from "../../store/party"
 import { currentUser } from "../../store/auth"
 import SearchBarComponent from "../SearchBarComponent/index"
-import SearchResultComponent from "../SearchResultComponent/index"
 import "./PartyComponent.css"
 
 const PartyComponent = () => {
     const dispatch = useDispatch()
     const history = useHistory()
 
-    // const allUsers = useSelector((state) => state.users.users);
     const theUser = useSelector((state) => state.currentUser)
     let searchedUsers = useSelector((state) => state.users.searched_users)
 
@@ -37,7 +35,8 @@ const PartyComponent = () => {
             partyMembers
         }
         console.log("THIS SHOULD BE OUR NEW PARTY ===>",newParty)
-        dispatch(createParty(newParty))
+        await dispatch(createParty(newParty))
+        await dispatch(currentUser())
         history.push("/")
     }
 

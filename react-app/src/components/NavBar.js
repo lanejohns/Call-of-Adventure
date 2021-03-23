@@ -62,28 +62,28 @@ const NavBar = () => {
       <Navbar.Brand href="/" >Call of Adventure</Navbar.Brand>
       {/* <Nav.Link href={`/party/${theUser.party_id}`}>Your Party</Nav.Link>
       <Nav.Link href="/party/create">Create a Party</Nav.Link> */}
-      {theUser.id && sessionLinks}
-      <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-        <Button className="m-2" variant="dark" onClick={homeClick}>
+      {/* {theUser.id && sessionLinks} */}
+      {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown"> */}
+        <Button className="m-2" variant="outline-light" onClick={homeClick}>
             Home
         </Button>
           <NavDropdown.Divider />
           {/* <Nav.Link href="/login" exact={true} activeClassName="active">
             Login
           </Nav.Link> */}
-          <Button className="m-2" variant="dark" onClick={loginClick}>
+          <Button className="m-2" variant="outline-light" onClick={loginClick}>
             Login
           </Button>
           <NavDropdown.Divider />
           {/* <Nav.Link href="/sign-up" exact={true} activeClassName="active">
             Sign Up
           </Nav.Link> */}
-          <Button className="m-2" variant="dark" onClick={signupClick}>
+          <Button className="m-2" variant="outline-light" onClick={signupClick}>
             Sign Up
           </Button>
           <NavDropdown.Divider />
           <LogoutButton />
-      </NavDropdown>
+      {/* </NavDropdown> */}
     </Navbar>
   );
 }

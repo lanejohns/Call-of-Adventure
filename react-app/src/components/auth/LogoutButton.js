@@ -20,7 +20,7 @@ const LogoutButton = () => {
     window.location.reload(false)
   };
 
-  return <Button className="m-2" variant="dark" onClick={onLogout}>Logout</Button>;
+  return <Button className="m-2" variant="outline-light" onClick={onLogout}>Logout</Button>;
 };
 
 export default LogoutButton;
