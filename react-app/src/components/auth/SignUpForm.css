@@ -1,5 +1,6 @@
 .form-container {
     display: flex;
-    border: black .5rem solid;
+    /* border: black .5rem solid; */
     justify-content: center;
+    padding: 1rem;
 }

@@ -57,7 +57,6 @@ export const loginThunk = (email, password) => async(dispatch) => {
 }
 
 export const signUpThunk = ({username, email, password, full_name, address, city, state, zipcode, latitude, longitude}) => async (dispatch) => {
-    console.log("Our thunk payload", username, email, password, full_name, address, city, state, zipcode, latitude, longitude)
     const response = await fetch("/api/auth/signup", {
         method: "POST",
         headers: {

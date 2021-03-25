@@ -201,7 +201,7 @@ const SignUpForm = () => {
 
         <Form.Row>
           <Form.Group>
-            <Form.Label>Address</Form.Label>
+            <Form.Label>Landmark Address</Form.Label>
             <Form.Control value={address} onChange={(event) => setAddress(event.target.value)} />
           </Form.Group>
           <Form.Group>

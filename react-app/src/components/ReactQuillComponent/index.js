@@ -26,9 +26,9 @@ const ReactQuillComponent = ({partyId}) => {
             // user_id: theUser.id,
             body: content
         }
-        console.log("PAYLOAD", payload)
         dispatch(postThunk(payload))
         setContent("")
+        window.location.reload(false)
     }
 
     return (
