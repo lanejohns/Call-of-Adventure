@@ -1,0 +1,5 @@
+.form-container {
+    display: flex;
+    border: black .5rem solid;
+    justify-content: center;
+}
