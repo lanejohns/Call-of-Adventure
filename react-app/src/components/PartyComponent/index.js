@@ -34,7 +34,6 @@ const PartyComponent = () => {
             open_to_request: openToRequest,
             partyMembers
         }
-        console.log("THIS SHOULD BE OUR NEW PARTY ===>",newParty)
         await dispatch(createParty(newParty))
         await dispatch(currentUser())
         history.push("/")

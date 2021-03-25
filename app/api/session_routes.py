@@ -69,5 +69,5 @@ def delete_session(id):
 
 @session_routes.route('/<id>')
 def party_sessions(id):
-    sessions = Session.query.filter(Party.id == id).all()
+    sessions = Session.query.filter(Session.party_id == id).all()
     return {"all_sessions": {session.id: session.to_dict() for session in sessions}}

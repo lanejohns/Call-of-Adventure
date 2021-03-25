@@ -23,7 +23,6 @@ export const postThunk = ({party_id, body}) => async (dispatch) => {
         },
         body: JSON.stringify({party_id, body})
     })
-    console.log("POST THUNK RESPONSE", response)
     const post = await response.json()
     dispatch(createNewPost(post))
     return post

@@ -17,6 +17,8 @@ const GoogleMapComponent = () => {
     const userSessions = useSelector(state => state.sessions.all_sessions)
     const dispatch = useDispatch()
 
+    const [selectedSession, setSelectedSession] = useState(null)
+
     useEffect(() => {
         dispatch(getSessions(userPartyId))
     }, [dispatch])
@@ -28,13 +30,31 @@ const GoogleMapComponent = () => {
         // defaultOptions={{styles:mapStyles}}
         >
             {userSessions && 
-            Object.values(userSessions).map((session) => (
-                <Marker 
-                key={session.id}
-                position={{ lat: session.latitude, lng: session.longitude }}
-                />
-            ))
-            }
+                Object.values(userSessions).map((session) => (
+                    <Marker 
+                        key={session.id}
+                        position={{ lat: session.latitude, lng: session.longitude }}
+                        onClick={() => {
+                            setSelectedSession(session)
+                        }}
+                    />
+                ))}
+                {selectedSession && (
+                    <InfoWindow
+                        position={{ lat: selectedSession.latitude, lng: selectedSession.longitude }}
+                        onCloseClick={() => {
+                            setSelectedSession(null)
+                        }}
+                    >
+                        <div>
+                            {selectedSession.address}
+                            <hr></hr>
+                            {selectedSession.date}
+                            <hr></hr>
+                            {selectedSession.description}
+                        </div>
+                    </InfoWindow>
+                )}
         </GoogleMap>
     )
 }
