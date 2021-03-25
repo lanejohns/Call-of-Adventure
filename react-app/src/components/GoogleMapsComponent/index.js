@@ -18,7 +18,6 @@ const GoogleMapComponent = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        console.log("THIS IS THE USERS PARTY ID", userPartyId)
         dispatch(getSessions(userPartyId))
     }, [dispatch])
 
