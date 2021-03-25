@@ -136,9 +136,6 @@ const SignUpForm = () => {
     setRepeatPassword(e.target.value);
   };
 
-  useEffect(() => {
-    console.log(username, email, password, repeatPassword, address, city, state, zipcode, full_name)
-  }, [username, email, password, repeatPassword, address, city, state, zipcode, full_name])
 
   if (theUser) {
     return <Redirect to="/" />;
