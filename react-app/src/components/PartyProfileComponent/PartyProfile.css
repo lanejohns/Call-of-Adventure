@@ -46,6 +46,7 @@
     border: solid black 0.2rem;
     height: 6000px;
     min-height: 200px;
+    width: 50rem;
 }
 
 .each-post {
